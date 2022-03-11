@@ -10,7 +10,7 @@ const Toolbar = (props) => {
   // const { state, dispatch } = useContext(loginContext);
   return (
     <div className={classes.Toolbar}>
-      s{/* <Logo /> */}
+      {/* <Logo /> */}
       <NavLink
         className={classes.button1}
         // exact
@@ -27,7 +27,7 @@ const Toolbar = (props) => {
       >
         Projects
       </NavLink>
-      {!props.loginStatus ? (
+      {props.loginStatus ? (
         <>
           <NavLink className={classes.button1} to={{ pathname: "/Login" }}>
             Sign in
