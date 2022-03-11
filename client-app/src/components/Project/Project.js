@@ -50,7 +50,7 @@ const Project = (props) => {
       <InfoColumn>
         <ProjectInfo> abc ehjkf dlkd;slkd </ProjectInfo>
         <ProjectInfo>
-          <FontAwesomeIcon icon="fa-solid fa-location-dot" />
+          <i className="fa-solid fa-location-dot" />
           Israel
         </ProjectInfo>
       </InfoColumn>
