@@ -4,6 +4,7 @@ import Projects from "../Projects/Projects";
 import Home from "../../components/Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+
 // import Appforgag from "../../components/Movie/MovieInformation/Appforgag";
 // import loginContext from "../../Contexts/loginContext";
 const Main = (props) => {
