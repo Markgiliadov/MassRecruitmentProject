@@ -1,60 +1,68 @@
 import React from "react";
-import "./Project.module.css";
-import styled from "styled-components";
+import "./Project.css";
+import Status from "../Status/Status";
+import ProgressBar from "../ProgressBar/ProgressBar";
 
-const ProjectCContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  width: 280px;
-  box-shadow: 0 3px 10px 0 #aaa;
-  cursor: pointer;
-`;
-const CoverImage = styled.img`
-  object-fit: cover;
-  height: 250px;
-`;
-const ProjectName = styled.span`
-  font-size: 18px;
-  font-weight: 600;
-  color: black;
-  margin: 15px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-const InfoColumn = styled.div`
-  display: flex;
-  flex-direction: col;
-  justify-content: space-between;
-`;
-const ProjectInfo = styled.span`
-  font-size: 16px;
-  font-weight: 500;
-  color: black;
-  white-space: nowrap;
-  overflow: hidden;
-  text-transform: capitalize;
-  text-overflow: ellipsis;
-`;
-const Project = (props) => {
-  //   const { name, img, info } = props.project;
-
+const Project = () => {
   return (
-    <ProjectCContainer>
-      <CoverImage
-        src="https://earthsky.org/upl/2018/06/ocean-apr27-2020-Cidy-Chai-North-Pacific-scaled-e1591491800783.jpeg"
+    <div className="project-wrap">
+      <img
+        className="project-poster"
+        src="https://images-na.ssl-images-amazon.com/images/I/91bsMwU7IzL._RI_.jpg"
         alt=""
       />
-      <ProjectName>Memory Card - HP</ProjectName>
-      <InfoColumn>
-        <ProjectInfo> abc ehjkf dlkd;slkd </ProjectInfo>
-        <ProjectInfo>
-          <i className="fa-solid fa-location-dot" />
-          Israel
-        </ProjectInfo>
-      </InfoColumn>
-    </ProjectCContainer>
+      <Status label="Finshed" />
+      <h3>Harry Poter</h3>
+      <div className="create-info">
+        <p>create at </p>
+      </div>
+      <p className="project-info">
+        Harry Potter is a series of seven fantasy novels written by British
+        author J. K. Rowling. The novels chronicle the lives of a young wizard,
+        Harry Potter, and his friends Hermione Granger and Ron Weasley, all of
+        whom are students at Hogwarts School of Witchcraft and Wizardry. The
+        main story arc concerns Harry's struggle against Lord Voldemort, a dark
+        wizard who intends to become immortal, overthrow the wizard governing
+        body known as the Ministry of Magic and subjugate all wizards and
+        Muggles (non-magical people).
+      </p>
+      <footer>
+        <div className="create-info">
+          <div>
+            <ProgressBar value={60} max={100} />
+            <p>finsh date </p>
+          </div>
+        </div>
+      </footer>
+      <img
+        className="project-poster"
+        src="https://images-na.ssl-images-amazon.com/images/I/91bsMwU7IzL._RI_.jpg"
+        alt=""
+      />
+      <Status label="Finshed" />
+      <h3>Harry Poter</h3>
+      <div className="create-info">
+        <p>create at </p>
+      </div>
+      <p className="project-info">
+        Harry Potter is a series of seven fantasy novels written by British
+        author J. K. Rowling. The novels chronicle the lives of a young wizard,
+        Harry Potter, and his friends Hermione Granger and Ron Weasley, all of
+        whom are students at Hogwarts School of Witchcraft and Wizardry. The
+        main story arc concerns Harry's struggle against Lord Voldemort, a dark
+        wizard who intends to become immortal, overthrow the wizard governing
+        body known as the Ministry of Magic and subjugate all wizards and
+        Muggles (non-magical people).
+      </p>
+      <footer>
+        <div className="create-info">
+          <div>
+            <ProgressBar value={60} max={100} />
+            <p>finsh date </p>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 };
 export default Project;
