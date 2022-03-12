@@ -1,22 +1,23 @@
 // import React, { useState, useEffect } from "react";
 import React from "react";
 import "./Home.css";
-
+import jwt from "jsonwebtoken";
 import Project from "../Project/Project";
 
 const Home = () => {
   //   const [data, setData] = useState();
+  const history = useHistory();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  //   useEffect(() => {
-  //     fetch("./data")
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setData(data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }, []);
+    if (token) {
+      const user = jwt.decode(token);
+      if (!user) {
+        localStorage.removeItem("token");
+        history.replace("/Login");
+      }
+    }
+  }, []);
   return (
     // <div className="projectList-wrap">
     //   {data.map((projectKey) => (

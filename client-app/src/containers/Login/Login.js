@@ -37,7 +37,18 @@ const Login = (props) => {
         password: password,
       }),
     });
+
+    const data = await response.json();
+    if (data.user) {
+      alert("Login successful");
+      window.location.href = "/Register";
+    } else {
+      alert("please check your username and password");
+    }
+
+    console.log(data);
   };
+
   // let info = null;
   // info = await db.collection("users").get();
   // let checkifvalid = null;
