@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import classes from "./Register.module.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import NotAvailableIcon from "../../Assets/NotAvailableEmailIcon/X-icon.png";
+import { useNavigate } from "react-router-dom";
 
 // import { FirebaseContext } from "../../FirebaseAuth/index";
 const initialInputStyle = [classes.input, ""];
@@ -80,6 +81,7 @@ const Register = (props) => {
       ),
     },
   };
+  const navigate = useNavigate();
   const [user, setUser] = useState(initialInputState);
   const [inputsStyles, setInputsStyles] = useState({
     email: initialInputStyle,
@@ -144,8 +146,11 @@ const Register = (props) => {
       }),
     });
 
-    // const data = response.json();
-
+    const data = await response.json();
+    console.log(data.status);
+    if (data.status === "ok") {
+      navigate("/Login");
+    }
     // console.log(data);
     //     e.preventDefault();
     //     props.history.push("/Login");

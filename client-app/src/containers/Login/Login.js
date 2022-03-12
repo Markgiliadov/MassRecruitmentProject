@@ -4,13 +4,14 @@ import classes from "./Login.module.css";
 import BarLoader from "react-spinners/BarLoader";
 import ClipLoader from "react-spinners/ClipLoader";
 import NotAvailableIcon from "../../Assets/NotAvailableEmailIcon/X-icon.png";
-
+import { useNavigate } from "react-router-dom";
 // import loginsidedrawer from "../../components/LoginSideDrawer/LoginSideDrawer";
 // import { FirebaseContext } from "../../FirebaseAuth/index";
 
 const Login = (props) => {
   //   const { state, dispatch } = useContext(loginContext);
   //   const Firebase = useContext(FirebaseContext);
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsgInvalid, setErrorMsgInvalid] = useState(null);
@@ -40,8 +41,10 @@ const Login = (props) => {
 
     const data = await response.json();
     if (data.user) {
+      localStorage.setItem("token", data.user);
       alert("Login successful");
-      window.location.href = "/Register";
+
+      navigate("/");
     } else {
       alert("please check your username and password");
     }
