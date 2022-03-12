@@ -28,25 +28,32 @@ const Login = (props) => {
   //     } else dispatch({ type: "loggedOut", loginStateTkn: null });
   //   }, [dispatch]);
 
-  //   const validateUserWithFirestore = async (username, password) => {
-  //     const db = Firebase.getFirestore();
-
-  //     let info = null;
-  //     info = await db.collection("users").get();
-  //     let checkifvalid = null;
-  //     info.forEach((doc) => {
-  //       if (doc.data().email === username && doc.data().password === password) {
-  //         checkifvalid = true;
-  //         dispatch({ type: "setLoginSpinnerStatus", payload: true });
-  //         setEmailAvailabilityLogo(null);
-  //         setErrorMsgInvalid(null);
-  //         signInWithFirebase(username, password);
-  //         return true;
-  //       } else {
-  //         setLoadingValidation(false);
-  //         dispatch({ type: "setLoginSpinnerStatus", payload: false });
-  //       }
-  //     });
+  const validateUserWithDB = async (username, password) => {
+    const response = await fetch("http://localhost:1338/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: username,
+        password: password,
+      }),
+    });
+  };
+  // let info = null;
+  // info = await db.collection("users").get();
+  // let checkifvalid = null;
+  // info.forEach((doc) => {
+  //   if (doc.data().email === username && doc.data().password === password) {
+  //     checkifvalid = true;
+  //     dispatch({ type: "setLoginSpinnerStatus", payload: true });
+  //     setEmailAvailabilityLogo(null);
+  //     setErrorMsgInvalid(null);
+  //     signInWithFirebase(username, password);
+  //     return true;
+  //   } else {
+  //     setLoadingValidation(false);
+  //     dispatch({ type: "setLoginSpinnerStatus", payload: false });
+  //   }
+  // });
 
   //     if (!checkifvalid)
   //       setErrorMsgInvalid(
@@ -108,7 +115,7 @@ const Login = (props) => {
       setEmailAvailabilityLogo(
         <img className={classes.xicon} src={NotAvailableIcon} alt="x-icon" />
       );
-      //   validateUserWithFirestore(username, password);
+      validateUserWithDB(username, password);
     }
   };
 

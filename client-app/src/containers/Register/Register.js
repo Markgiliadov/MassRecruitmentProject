@@ -112,17 +112,17 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isInputValidated = inputValidation();
-    if (
-      isInputValidated === initialValidationStatus && // if all 4 error inputs don't contain errors
-      user.email &&
-      user.password &&
-      user.name &&
-      user.phonenumber
-    ) {
-      //   dispatch({ type: "setLoginSpinnerStatus", payload: true });
-      handleRegister(e);
-    } else alert("you must enter an input!");
+    // const isInputValidated = inputValidation();
+    // if (
+    //   isInputValidated === initialValidationStatus && // if all 4 error inputs don't contain errors
+    //   user.email &&
+    //   user.password &&
+    //   user.name &&
+    //   user.phonenumber
+    // ) {
+    //   dispatch({ type: "setLoginSpinnerStatus", payload: true });
+    handleRegister(e);
+    // } else alert("you must enter an input!");
   };
   const inputValidation = () => {
     let count = initialValidationStatus;
@@ -132,7 +132,21 @@ const Register = (props) => {
     });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
+    const response = await fetch("http://localhost:1338/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+        name: user.name,
+        phonenumber: user.phonenumber,
+      }),
+    });
+
+    // const data = response.json();
+
+    // console.log(data);
     //     e.preventDefault();
     //     props.history.push("/Login");
     //     const db = Firebase.getFirestore();
