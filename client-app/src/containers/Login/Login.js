@@ -144,7 +144,7 @@ const Login = (props) => {
     loginForm = (
       <form className={classes.form} onSubmit={handleSubmit}>
         <label className={classes.label}>
-          Username
+          Email
           <div
             // className={inputsStyles.email.join(" ")}
             style={{ display: "flex" }}
@@ -152,6 +152,7 @@ const Login = (props) => {
             <input
               className={classes.input}
               type="text"
+              placeholder="Enter email"
               value={username}
               onChange={(event) => {
                 setUsername(event.target.value);
@@ -168,6 +169,7 @@ const Login = (props) => {
             <input
               className={classes.input}
               type="password"
+              placeholder="Enter password"
               value={password}
               onChange={(event) => {
                 setPassword(event.target.value);

@@ -17,12 +17,12 @@ const Home = () => {
   const [tempProjects, setTempProjects] = useState("");
   const history = useNavigate();
 
-  const checkJWT = async () => {
+  const getDataFromDB = async () => {
     console.log("entering jwt");
     const req = await fetch("http://localhost:1338/api/projects", {
-      // method: "GET",
+      method: "GET",
       headers: {
-        "x-access-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
       },
     });
     console.log(req);
@@ -48,7 +48,7 @@ const Home = () => {
     //     history.replace("/Login");
     //   } else {
     //     console.log("checking jwt");
-    await checkJWT();
+    await getDataFromDB();
 
     //   }
     // }

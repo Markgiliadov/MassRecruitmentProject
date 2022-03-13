@@ -53,7 +53,7 @@ body {
   visibility: visible;
 }
 .input {
-  width: 90%;
+  width: 100%;
   padding: 1em;
   line-height: 1.4;
   background-color: grey-lightest;
@@ -63,7 +63,6 @@ body {
 textarea:focus,
 input:focus {
   outline: none;
-
 }
 .inputChange {
   border: 1.05px solid rgb(0, 60, 255);
