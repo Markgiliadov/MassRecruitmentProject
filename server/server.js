@@ -31,6 +31,17 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
+app.post("/api/registerEmailTest", async (req, res) => {
+  const user = await User.findOne({
+    email: req.body.email,
+  });
+  if (!user) {
+    return res.json({ status: "ok" });
+  } else {
+    return res.json({ status: "error", error: "Invalid email" });
+  }
+});
+
 app.post("/api/login", async (req, res) => {
   console.log(req.body);
   const user = await User.findOne({
