@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("./models/User.model");
+const Project = require("./models/Project.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -69,11 +70,21 @@ app.post("/api/projects", async (req, res) => {
   try {
     const decoded = jwt.verify(token, "secret123");
     const email = decoded.email;
-    await User.updateOne(
-      { email: email },
-      { $set: { projects: req.body.projects } }
-    );
-    return res.json({ status: "ok" });
+    const user = await User.findOne({ email: email });
+    if (user) {
+      console.log("trying to update one", req.body);
+      const data = await Project.create({
+        idea: req.body.idea,
+        video: req.body.video,
+        pictures: {
+          img_url: req.body.pictures,
+          img_description: "NONE",
+        },
+        amount: req.body.amount,
+      });
+      console.log(data);
+      return res.json({ status: "ok" });
+    }
   } catch (error) {
     console.log(error);
     res.json({ status: "error", error: "invalid token" });
