@@ -96,35 +96,27 @@ const Register = (props) => {
   const [wrongPathMsg, setWrongPathMsg] = useState("");
   const [emailAvailabilityLogo, setEmailAvailabilityLogo] = useState(null);
   let registrationForm = null;
-  //   useEffect(() => {
-  //     if (localStorage.getItem("JWT")) {
-  //       props.history.push("/");
-  //     }
-  //     if (props.isValidPath === "*") {
-  //       setWrongPathMsg(
-  //         <h1>
-  //           404, not found! <br />
-  //           You can Register :) <br />
-  //           Redirected from path /{props.match.path}
-  //         </h1>
-  //       );
-  //       props.history.push("/Register");
-  //     } else setWrongPathMsg("");
-  //   }, [props.history, props.isValidPath, props.match.path]);
+  useEffect(() => {
+    if (localStorage.getItem("JWT")) {
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const isInputValidated = inputValidation();
-    // if (
-    //   isInputValidated === initialValidationStatus && // if all 4 error inputs don't contain errors
-    //   user.email &&
-    //   user.password &&
-    //   user.name &&
-    //   user.phonenumber
-    // ) {
-    //   dispatch({ type: "setLoginSpinnerStatus", payload: true });
-    handleRegister(e);
-    // } else alert("you must enter an input!");
+    const isInputValidated = inputValidation();
+    if (
+      // isInputValidated === initialValidationStatus && // if all 4 error inputs don't contain errors
+      user.email &&
+      user.password.length > 6 &&
+      user.name &&
+      user.phonenumber.length >= 10
+    ) {
+      handleRegister(e);
+    } else {
+      console.log(isInputValidated);
+      alert("you must enter correct!");
+    }
   };
   const inputValidation = () => {
     let count = initialValidationStatus;
@@ -151,46 +143,7 @@ const Register = (props) => {
     if (data.status === "ok") {
       navigate("/Login");
     }
-    // console.log(data);
-    //     e.preventDefault();
-    //     props.history.push("/Login");
-    //     const db = Firebase.getFirestore();
-    //     Firebase.getAuth()
-    //       .createUserWithEmailAndPassword(user.email, user.password)
-    //       .then(() => {
-    //         signInWithFirebase(user.email, user.password);
-    //         db.collection("users").add({
-    //           email: user.email,
-    //           password: user.password,
-    //           name: user.name,
-    //           phonenumber: user.phonenumber,
-    //         });
-    //       })
-    //       .catch((err) => console.log(err));
   };
-  //   const signInWithFirebase = (username, password) => {
-  //     Firebase.getAuth()
-  //       .signInWithEmailAndPassword(username, password)
-  //       .then((res) => {
-  //         dispatch({ type: "setUsername", payload: username });
-  //         dispatch({ type: "setPassword", payload: password });
-  //         dispatch({
-  //           type: "loggedIn",
-  //           payload: { username: username, password: password },
-  //         });
-  //         res.user.getIdTokenResult(true).then((tk) => {
-  //           localStorage.setItem("JWT", tk.token);
-
-  //           dispatch({ type: "setJWT", payload: tk.token });
-
-  //           dispatch({ type: "setLoginSpinnerStatus", payload: false });
-  //           props.history.push("/");
-  //         });
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
   const handleEmailAvailabilityLogo = (emailAvailable) => {
     console.log(emailAvailable);
     if (emailAvailable) {
@@ -224,33 +177,61 @@ const Register = (props) => {
       // setEmailAvailabilityLogo(null);
     }
   };
-  const checkEmailAvailablity = async (valueEn) => {
-    // const db = Firebase.getFirestore();
-    // let emailavailable = null;
-    // let emailUnavailable = null;
-    // await db
-    //   .collection("users")
-    //   .get()
-    //   .then((querySnapshot) => {
-    //     querySnapshot.forEach((doc) => {
-    //       if (doc.data().email === valueEn) {
-    //         setInputs(
-    //           "email",
-    //           true,
-    //           errorMessages.badEmail.emailUnavailable,
-    //           true
-    //         );
-    //         emailUnavailable = true;
-    //       } else {
-    //         emailavailable = true;
-    //         setLoadingEmail(() => false);
-    //       }
-    //     });
-    //   });
-    // console.log(emailavailable, "OTHJER " + emailUnavailable);
+
+  const checkDBforEmail = async () => {
+    let emailavailable = null;
+    let emailUnavailable = null;
+    const response = await fetch(
+      "http://localhost:1338/api/registerEmailTest",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: user.email,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    console.log(data.status);
+    if (data.status === "ok") {
+      setInputs("email", true, errorMessages.badEmail.emailUnavailable, true);
+      handleEmailAvailabilityLogo(false);
+    } else {
+      emailavailable = true;
+      setLoadingEmail(() => false);
+      handleEmailAvailabilityLogo(true);
+    }
+
     // if (emailUnavailable) handleEmailAvailabilityLogo(false);
     // else handleEmailAvailabilityLogo(true);
   };
+  // const checkEmailAvailablity = async (valueEn) => {
+  //   const db = Firebase.getFirestore();
+
+  //   await db
+  //     .collection("users")
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //         if (doc.data().email === valueEn) {
+  //           setInputs(
+  //             "email",
+  //             true,
+  //             errorMessages.badEmail.emailUnavailable,
+  //             true
+  //           );
+  //           emailUnavailable = true;
+  //         } else {
+  //           emailavailable = true;
+  //           setLoadingEmail(() => false);
+  //         }
+  //       });
+  //     });
+  //   console.log(emailavailable, "OTHJER " + emailUnavailable);
+  //   if (emailUnavailable) handleEmailAvailabilityLogo(false);
+  //   else handleEmailAvailabilityLogo(true);
+  // };
   const handleEmailBadFormat = (valueEn) => {
     let firstStr = "";
     let secondStr = "";
@@ -272,7 +253,7 @@ const Register = (props) => {
               setLoadingEmail(true);
               setCheckEmailAvailabilityTrigger(
                 setTimeout(() => {
-                  checkEmailAvailablity(valueEn);
+                  checkDBforEmail(valueEn);
                 }, 1000)
               );
             } else {
