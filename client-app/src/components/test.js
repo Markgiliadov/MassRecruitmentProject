@@ -1,0 +1,3 @@
+test("should first", () => {
+  second;
+});
