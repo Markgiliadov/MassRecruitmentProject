@@ -90,6 +90,7 @@ const Home = () => {
       return (
         <div key={prjVal._id}>
           <Project
+            titleProject={prjVal.titleProject}
             idea={prjVal.idea}
             video={prjVal.video}
             pictures={prjVal.pictures}

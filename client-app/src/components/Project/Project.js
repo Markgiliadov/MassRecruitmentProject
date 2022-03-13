@@ -16,19 +16,19 @@ const Project = (props) => {
       );
     });
   }
+  console.log(props.titleProject);
   return (
     <div className="project-wrap">
       <img className="project-poster" src={props.pictures[0].img_url} alt="" />
       <Status label="Finished" />
-      <h3>{props.idea}</h3>
+      <h3>{props.titleProject}</h3>
       <div className="create-info">
         <p>created at {props.date}</p>
       </div>
       {/* {prjPics} */}
-      <p className="project-info">
-        {props.video}
-        Amount to collect {props.amount}
-      </p>
+      <p className="project-info"> video {props.video}</p>
+      <p className="project-info"> {props.idea}</p>
+      <p> Amount to collect {props.amount}</p>
       <footer>
         <div className="create-info">
           <div>

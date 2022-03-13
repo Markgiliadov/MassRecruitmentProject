@@ -21,7 +21,7 @@
 }
 
 .project-info {
-  position: relative;
+  /* position: relative; */
   max-height: 50px;
   overflow: hidden;
   padding-right: 0.6rem;
