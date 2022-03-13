@@ -15,7 +15,10 @@ const Main = (props) => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/Projects" element={<Projects />} />
-        <Route path="/Login" element={<Login />} />
+        <Route
+          path="/Login"
+          element={<Login triggerLoginStatus={props.triggerLoginStatus} />}
+        />
         <Route path="/Register" element={<Register />} />
 
         {/* <Route path="/:id" render={(props) => <Appforgag {...props} />} /> */}
