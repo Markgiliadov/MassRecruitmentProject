@@ -13,23 +13,12 @@ const wt_decode = (token) => {
 };
 
 const Home = () => {
-  const [projects, setProjects] = useState("");
+  const [projects, setProjects] = useState([]);
   const [tempProjects, setTempProjects] = useState("");
   const history = useNavigate();
 
   const checkJWT = async () => {
     console.log("entering jwt");
-    // const req = await fetch("http://localhost:1338/api/projects", {
-    //   headers: {
-    //     "x-access-token": localStorage.getItem("token"),
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     return data;
-    //   })
-    //   .catch((err) => console.log(err));
     const req = await fetch("http://localhost:1338/api/projects", {
       // method: "GET",
       headers: {
@@ -40,6 +29,7 @@ const Home = () => {
     const data = await req.json();
     console.log(data);
     if (data.status === "ok") {
+      console.log(data.projects);
       setProjects(data.projects);
     } else {
       alert(data.error);
@@ -47,21 +37,21 @@ const Home = () => {
     console.log(data);
   };
   useEffect(async () => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
+    // console.log(token);
+    // if (token) {
+    //   console.log("h");
+    //   const user = wt_decode(token);
+    //   console.log(user);
+    //   if (!user) {
+    //     localStorage.removeItem("token");
+    //     history.replace("/Login");
+    //   } else {
+    //     console.log("checking jwt");
+    await checkJWT();
 
-    console.log(token);
-    if (token) {
-      console.log("h");
-      const user = wt_decode(token);
-      console.log(user);
-      if (!user) {
-        localStorage.removeItem("token");
-        history.replace("/Login");
-      } else {
-        console.log("checking jwt");
-        await checkJWT();
-      }
-    }
+    //   }
+    // }
   }, []);
 
   const updateProjects = async (e) => {
@@ -86,30 +76,34 @@ const Home = () => {
       alert(data.error);
     }
   };
+  const getCurrDate = () => {
+    const today = new Date();
+    return (
+      today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate()
+    );
+  };
+  let reProjects = null;
+  if (projects) {
+    console.log(projects);
+    reProjects = projects.map((prjVal, index) => {
+      console.log(prjVal.pictures[0]);
+      return (
+        <div key={prjVal._id}>
+          <Project
+            idea={prjVal.idea}
+            video={prjVal.video}
+            pictures={prjVal.pictures}
+            amount={prjVal.amount}
+            date={getCurrDate()}
+          />
+        </div>
+      );
+    });
+  }
   return (
-    // <div className="projectList-wrap">
-    //   {data.map((projectKey) => (
-    //     <Project project={projectKey} />
-    //   ))}
-    // </div>
-    // <div className="projectList-wrap">
-    //   {projects || "no projects found"}
-    //   <Project />
-    //   <Project />
-    //   <Project />
-    // </div>
-    <div>
-      <h1>Your projects: {projects || "No projects found"}</h1>
-      <form onSubmit={updateProjects}>
-        <input
-          type="text"
-          placeholder="Projects"
-          value={tempProjects}
-          onChange={(e) => setTempProjects(e.target.value)}
-        />
-        <input type="submit" value="Update projects" />
-      </form>
-    </div>
+    <>
+      <div className="projectList-wrap">{reProjects}</div>
+    </>
   );
 };
 

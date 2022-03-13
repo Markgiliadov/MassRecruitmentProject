@@ -17,7 +17,7 @@ const wt_decode = (token) => {
 const Projects = () => {
   const [projects, setProjects] = useState("");
   const [tempProjects, setTempProjects] = useState("");
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const initialInputStyle = [classes.input, ""];
   const [project, setProject] = useState(initialInputState);
@@ -27,12 +27,11 @@ const Projects = () => {
 
     console.log(token);
     if (token) {
-      console.log("h");
       const user = wt_decode(token);
       console.log(user);
       if (!user) {
         localStorage.removeItem("token");
-        history.replace("/Login");
+        navigate.replace("/Login");
       } else {
         console.log("checking jwt");
         await checkJWT();
@@ -82,6 +81,7 @@ const Projects = () => {
     const data = await req.json();
     console.log(data, data.projects);
     if (data.status === "ok") {
+      navigate("/");
       setProjects(tempProjects);
       setTempProjects("");
     } else {

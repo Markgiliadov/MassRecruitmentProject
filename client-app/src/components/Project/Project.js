@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Project.css";
 import Status from "../Status/Status";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-const Project = () => {
+const Project = (props) => {
+  let prjPics = null;
+
+  if (props.pictures[0]) {
+    prjPics = props.pictures.map((pic) => {
+      return (
+        <div key={pic._id}>
+          {pic.img_url}
+          {pic.img_description}
+        </div>
+      );
+    });
+  }
   return (
     <div className="project-wrap">
       <img
@@ -11,54 +23,21 @@ const Project = () => {
         src="https://images-na.ssl-images-amazon.com/images/I/91bsMwU7IzL._RI_.jpg"
         alt=""
       />
-      <Status label="Finshed" />
-      <h3>Harry Poter</h3>
+      <Status label="Finished" />
+      <h3>{props.idea}</h3>
       <div className="create-info">
-        <p>create at </p>
+        <p>created at {props.date}</p>
       </div>
+      {prjPics}
       <p className="project-info">
-        Harry Potter is a series of seven fantasy novels written by British
-        author J. K. Rowling. The novels chronicle the lives of a young wizard,
-        Harry Potter, and his friends Hermione Granger and Ron Weasley, all of
-        whom are students at Hogwarts School of Witchcraft and Wizardry. The
-        main story arc concerns Harry's struggle against Lord Voldemort, a dark
-        wizard who intends to become immortal, overthrow the wizard governing
-        body known as the Ministry of Magic and subjugate all wizards and
-        Muggles (non-magical people).
+        {props.video}
+        Amount to collect {props.amount}
       </p>
       <footer>
         <div className="create-info">
           <div>
             <ProgressBar value={60} max={100} />
-            <p>finsh date </p>
-          </div>
-        </div>
-      </footer>
-      <img
-        className="project-poster"
-        src="https://images-na.ssl-images-amazon.com/images/I/91bsMwU7IzL._RI_.jpg"
-        alt=""
-      />
-      <Status label="Finshed" />
-      <h3>Harry Poter</h3>
-      <div className="create-info">
-        <p>create at </p>
-      </div>
-      <p className="project-info">
-        Harry Potter is a series of seven fantasy novels written by British
-        author J. K. Rowling. The novels chronicle the lives of a young wizard,
-        Harry Potter, and his friends Hermione Granger and Ron Weasley, all of
-        whom are students at Hogwarts School of Witchcraft and Wizardry. The
-        main story arc concerns Harry's struggle against Lord Voldemort, a dark
-        wizard who intends to become immortal, overthrow the wizard governing
-        body known as the Ministry of Magic and subjugate all wizards and
-        Muggles (non-magical people).
-      </p>
-      <footer>
-        <div className="create-info">
-          <div>
-            <ProgressBar value={60} max={100} />
-            <p>finsh date </p>
+            <p>finish date: {props.date} </p>
           </div>
         </div>
       </footer>
