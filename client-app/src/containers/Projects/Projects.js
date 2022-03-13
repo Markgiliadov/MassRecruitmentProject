@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import classes from "./Projects.module.css";
 import { useNavigate } from "react-router-dom";
 const initialInputState = {
+  titleProject: "",
   idea: "",
   video: "",
   pictures: [],
@@ -15,6 +16,7 @@ const wt_decode = (token) => {
 };
 
 const Projects = () => {
+  const [inputPicArr, setPicArr] = useState([{ url: "" }]);
   const [projects, setProjects] = useState("");
   const [tempProjects, setTempProjects] = useState("");
   const navigate = useNavigate();
@@ -59,7 +61,8 @@ const Projects = () => {
   };
   const addOrUpdateProject = async () => {
     console.log(
-      "before adding to db:" + project.idea,
+      "before adding to db:" + project.titleProject,
+      project.idea,
       project.video,
       project.pictures,
       project.amount
@@ -71,6 +74,7 @@ const Projects = () => {
         "x-access-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
+        titleProject: project.titleProject,
         idea: project.idea,
         video: project.video,
         pictures: project.pictures,
@@ -102,9 +106,30 @@ const Projects = () => {
 
     addOrUpdateProject();
   };
+
+  const handelAdd = () => {
+    setPicArr([...inputPicArr, { url: "" }]);
+  };
+
+  const handelRemove = (index) => {
+    const values = [...inputPicArr];
+    values.splice(index, 1);
+    setPicArr(values);
+  };
   return (
     <div>
       <form className={classes.form} onSubmit={handleSubmit} noValidate>
+        <label className={classes.label}>
+          Project name
+          <input
+            className={initialInputStyle}
+            name="titleProject"
+            type="text"
+            placeholder="Enter the name project"
+            value={project.titleProject}
+            onChange={(e) => handleInputChange(e)}
+          />
+        </label>
         <label className={classes.label}>
           Project idea
           <div
@@ -113,7 +138,7 @@ const Projects = () => {
           >
             <textarea
               className={initialInputStyle}
-              style={{ border: "none", padding: "0" }}
+              style={{ border: "outset", padding: "0" }}
               name="idea"
               type="text"
               placeholder="Type your idea here"
@@ -147,18 +172,25 @@ const Projects = () => {
           />
           {/* {inputError.password} */}
         </label>
+
         <label className={classes.label}>
           Add pictures
-          <input
-            className={initialInputStyle}
-            name="pictures"
-            type="url"
-            placeholder="Enter picture URL"
-            value={project.pictures}
-            onChange={(e) => handleInputChange(e)}
-          />
+          {inputPicArr.map((picArr, index) => (
+            <input
+              key={index}
+              className={initialInputStyle}
+              name="pictures"
+              type="url"
+              placeholder="Enter picture URL"
+              // value={project.pictures}
+              onChange={(e) => handleInputChange(e)}
+            />
+          ))}
           {/* {inputError.name} */}
+          <button onClick={() => handelAdd()}>+</button>
+          <button onClick={() => handelRemove()}>-</button>
         </label>
+
         <label className={classes.label}>
           Amount to reach
           <input

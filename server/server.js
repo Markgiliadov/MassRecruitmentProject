@@ -87,6 +87,7 @@ app.post("/api/projects", async (req, res) => {
     if (user) {
       console.log("trying to update one", req.body);
       const data = await Project.create({
+        titleProject: req.body.titleProject,
         idea: req.body.idea,
         video: req.body.video,
         pictures: {

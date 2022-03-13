@@ -18,17 +18,13 @@ const Project = (props) => {
   }
   return (
     <div className="project-wrap">
-      <img
-        className="project-poster"
-        src="https://images-na.ssl-images-amazon.com/images/I/91bsMwU7IzL._RI_.jpg"
-        alt=""
-      />
+      <img className="project-poster" src={props.pictures[0].img_url} alt="" />
       <Status label="Finished" />
       <h3>{props.idea}</h3>
       <div className="create-info">
         <p>created at {props.date}</p>
       </div>
-      {prjPics}
+      {/* {prjPics} */}
       <p className="project-info">
         {props.video}
         Amount to collect {props.amount}

@@ -12,7 +12,7 @@
 .label {
   width: 100%;
   padding: 0.8em;
-  line-height: 1.4;
+  line-height: 1.6;
   background-color: grey-lightest;
   border: 1px solid gainsboro;
   border-radius: 3px;
@@ -63,6 +63,7 @@ body {
 textarea:focus,
 input:focus {
   outline: none;
+
 }
 .inputChange {
   border: 1.05px solid rgb(0, 60, 255);

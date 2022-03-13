@@ -6,6 +6,7 @@ const picture = new mongoose.Schema({
 });
 const Project = new mongoose.Schema(
   {
+    titleProject: { type: String, required: true },
     idea: { type: String, required: true },
     video: { type: String, required: true },
     pictures: { type: [picture], required: true },
