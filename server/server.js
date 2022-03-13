@@ -64,11 +64,11 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.get("/api/projects", async (req, res) => {
-  const token = req.headers["x-access-token"];
+  // const token = req.headers["x-access-token"];
   try {
-    const decoded = jwt.verify(token, "secret123");
-    const email = decoded.email;
-    const user = await User.findOne({ email: email });
+    // const decoded = jwt.verify(token, "secret123");
+    // const email = decoded.email;
+    // const user = await User.findOne({ email: email });
     Project.find({}, (error, projects) => {
       console.log(projects);
       let projectArr = [];
