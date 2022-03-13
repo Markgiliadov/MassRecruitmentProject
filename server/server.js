@@ -58,7 +58,20 @@ app.get("/api/projects", async (req, res) => {
     const decoded = jwt.verify(token, "secret123");
     const email = decoded.email;
     const user = await User.findOne({ email: email });
-    return res.json({ status: "ok", projects: user.projects });
+    Project.find({}, (error, projects) => {
+      console.log(projects);
+      let projectArr = [];
+      projects.forEach((pr) => {
+        console.log("aaa" + pr);
+        projectArr.push(pr);
+      });
+      // Object.entries(projects).map((project) => {
+      //   projectArr.push(project);
+      // });
+      console.log("66" + projectArr);
+      console.log("afafa");
+      return res.json({ status: "ok", projects: projectArr });
+    });
   } catch (error) {
     console.log(error);
     res.json({ status: "error", error: "invalid token" });
