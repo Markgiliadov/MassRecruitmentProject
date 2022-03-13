@@ -5,6 +5,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("./models/User.model");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
 app.use(cors());
 app.use(express.json());
 
@@ -13,9 +15,10 @@ mongoose.connect("mongodb://localhost:27017/mass-recruitment-project");
 app.post("/api/register", async (req, res) => {
   console.log(req.body);
   try {
+    const newPassword = await bcrypt.hash(req.body.password, 10);
     await User.create({
       email: req.body.email,
-      password: req.body.password,
+      password: newPassword,
       name: req.body.name,
       phonenumber: req.body.phonenumber,
     });
@@ -31,8 +34,14 @@ app.post("/api/login", async (req, res) => {
   console.log(req.body);
   const user = await User.findOne({
     email: req.body.email,
-    password: req.body.password,
   });
+  if (!user) {
+    return { status: "error", error: "Invalid login" };
+  }
+  const isPasswordValid = await bcrypt.compare(
+    req.body.password,
+    user.password
+  );
   if (user) {
     const token = jwt.sign(
       { email: req.body.email, name: req.body.name },
@@ -42,6 +51,35 @@ app.post("/api/login", async (req, res) => {
   } else return res.json({ status: "error", user: false });
 });
 
+app.get("/api/projects", async (req, res) => {
+  const token = req.headers["x-access-token"];
+  try {
+    const decoded = jwt.verify(token, "secret123");
+    const email = decoded.email;
+    const user = await User.findOne({ email: email });
+    return res.json({ status: "ok", projects: user.projects });
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "error", error: "invalid token" });
+  }
+});
+
+app.post("/api/projects", async (req, res) => {
+  const token = req.headers["x-access-token"];
+  try {
+    const decoded = jwt.verify(token, "secret123");
+    const email = decoded.email;
+    await User.updateOne(
+      { email: email },
+      { $set: { projects: req.body.projects } }
+    );
+    return res.json({ status: "ok" });
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "error", error: "invalid token" });
+  }
+});
+
 app.listen(1338, () => {
-  console.log("server started 1338");
+  console.log("Server started on 1338");
 });
