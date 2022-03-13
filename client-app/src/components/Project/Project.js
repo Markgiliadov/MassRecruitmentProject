@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Project.css";
+import classes from "./Project.module.css";
 import Status from "../Status/Status";
 import ProgressBar from "../ProgressBar/ProgressBar";
 
@@ -18,17 +18,17 @@ const Project = (props) => {
   }
   console.log(props.titleProject);
   return (
-    <div className="project-wrap">
-      <img className="project-poster" src={props.pictures[0].img_url} alt="" />
+    <div className={classes.movie_card}>
+      <img className={classes.Images} src={props.pictures[0].img_url} alt="" />
       <Status label="Finished" />
-      <h3>{props.titleProject}</h3>
-      <div className="create-info">
+      <h3 className={classes.movie_header}>{props.titleProject}</h3>
+      <div className={classes.locandina}>
         <p>created at {props.date}</p>
       </div>
       {/* {prjPics} */}
-      <p className="project-info"> video {props.video}</p>
-      <p className="project-info"> {props.idea}</p>
-      <p> Amount to collect {props.amount}</p>
+      <p className={classes.movie_desc}> video {props.video}</p>
+      <p className={classes.text}> {props.idea}</p>
+      <p className={classes.movie_social}> Amount to collect {props.amount}</p>
       <footer>
         <div className="create-info">
           <div>
@@ -38,6 +38,16 @@ const Project = (props) => {
         </div>
       </footer>
     </div>
+    // <div className={classes.container}>
+    //   <div className={classes.movie_card}>
+    //     <div className={classes.movie_header}>
+    //       <img className={classes.Images} src={props.image} alt="Movie" />
+    //     </div>
+    //     <div className={classes.movie_content}>
+    //       <div className={classes.movie_content_header}></div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 export default Project;

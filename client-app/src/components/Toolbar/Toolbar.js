@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Toolbar.module.css";
 import { NavLink } from "react-router-dom";
 import Button from "../Button/Button";
@@ -8,9 +8,13 @@ import Button from "../Button/Button";
 // import LoginSideDrawer from "../LoginSideDrawer/LoginSideDrawer";
 const Toolbar = (props) => {
   // const { state, dispatch } = useContext(loginContext);
+  const [myLoginState, SetMyLoginState] = useState(props.loginStatus);
   useEffect(() => {
-    console.log("loginStatus changed to: " + props.loginStatus);
-  }, [props.loginStatus]);
+    if (localStorage.getItem("token")) SetMyLoginState(true);
+    else {
+      SetMyLoginState(false);
+    }
+  }, []);
   return (
     <div className={classes.Toolbar}>
       {/* <Logo /> */}
@@ -30,7 +34,7 @@ const Toolbar = (props) => {
       >
         Projects
       </NavLink>
-      {!props.loginStatus ? (
+      {!myLoginState ? (
         <>
           <NavLink className={classes.button1} to={{ pathname: "/Login" }}>
             Sign in

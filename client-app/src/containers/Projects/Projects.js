@@ -187,8 +187,12 @@ const Projects = () => {
             />
           ))}
           {/* {inputError.name} */}
-          <button onClick={() => handelAdd()}>+</button>
-          <button onClick={() => handelRemove()}>-</button>
+          <button type="button" onClick={handelAdd}>
+            +
+          </button>
+          <button type="button" onClick={handelRemove}>
+            -
+          </button>
         </label>
 
         <label className={classes.label}>

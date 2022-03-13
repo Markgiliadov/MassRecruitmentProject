@@ -1,7 +1,7 @@
 // import React, { useState, useEffect } from "react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
+import classes from "./Home.module.css";
 // import jwt from "jsonwebtoken";
 import Project from "../Project/Project";
 import e from "cors";
@@ -103,7 +103,7 @@ const Home = () => {
   }
   return (
     <>
-      <div className="projectList-wrap">{reProjects}</div>
+      <div className={classes.projectList_wrap}>{reProjects}</div>
     </>
   );
 };
