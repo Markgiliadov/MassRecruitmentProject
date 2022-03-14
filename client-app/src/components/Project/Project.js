@@ -27,7 +27,7 @@ const Project = (props) => {
       </div>
       {/* {prjPics} */}
       <p className={classes.movie_desc}> video {props.video}</p>
-      <p className={classes.text}> {props.idea}</p>
+      <text className={classes.text} value={props.idea} />
       <p className={classes.movie_social}> Amount to collect {props.amount}</p>
       <footer>
         <div className="create-info">

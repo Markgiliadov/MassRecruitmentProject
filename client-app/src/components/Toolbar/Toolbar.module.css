@@ -61,3 +61,43 @@
     margin: 0.4em auto;
   }
 }
+HTML CSSResult Skip Results Iframe body {
+  background: rgb(79, 99, 143);
+  color: rgb(96, 114, 124);
+  font-size: 80px;
+  margin: 0px;
+}
+
+.container {
+  background-color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 20%;
+  border-radius: 2%;
+}
+
+.text {
+  position: relative;
+  padding: 8px;
+  transition: 0.2s;
+}
+
+.text::after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #ddd;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.text:hover::after {
+  width: 100%;
+  left: 0;
+}

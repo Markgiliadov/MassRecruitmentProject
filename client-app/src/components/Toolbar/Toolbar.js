@@ -10,6 +10,7 @@ const Toolbar = (props) => {
   // const { state, dispatch } = useContext(loginContext);
   const [myLoginState, SetMyLoginState] = useState(props.loginStatus);
   useEffect(() => {
+    console.log(props.loginAuth);
     if (localStorage.getItem("token")) SetMyLoginState(true);
     else {
       SetMyLoginState(false);
@@ -18,6 +19,7 @@ const Toolbar = (props) => {
   return (
     <div className={classes.Toolbar}>
       {/* <Logo /> */}
+
       <NavLink
         className={classes.button1}
         // exact
@@ -34,7 +36,7 @@ const Toolbar = (props) => {
       >
         Projects
       </NavLink>
-      {!myLoginState ? (
+      {!props.loginStatus ? (
         <>
           <NavLink className={classes.button1} to={{ pathname: "/Login" }}>
             Sign in
@@ -44,19 +46,35 @@ const Toolbar = (props) => {
           </NavLink>
         </>
       ) : (
-        <Button
-          className={classes.button1}
-          style={{
-            cursor: "pointer",
-            height: "58px",
-            paddingBottom: "1.05em",
-            marginRight: "0.7em",
-            // fontWeight: "400",
-            fontSize: "14px",
-          }}
-          myFunction={props.signOut}
-          name="Sign Out"
-        />
+        <>
+          {props.loginAuth === "admin" ? (
+            <NavLink
+              className={classes.button1}
+              // exact
+              // activeStyle={{ backgroundColor: "red" }}
+              to={{ pathname: "/Administrator" }}
+            >
+              Administrator
+            </NavLink>
+          ) : null}
+          <Button
+            className={classes.button1}
+            style={{
+              cursor: "pointer",
+              height: "52px",
+              paddingBottom: "1.05em",
+              marginRight: "0.7em",
+              // fontWeight: "400",
+              fontSize: "14px",
+            }}
+            myFunction={props.signOut}
+            name="Sign Out"
+          />
+
+          <div className={classes.container}>
+            Hello <span className={classes.text}>{props.loginAuth}</span>
+          </div>
+        </>
       )}
       {/* 
       <NavLink className={classes.button1} to={{ pathname: "/About" }}>

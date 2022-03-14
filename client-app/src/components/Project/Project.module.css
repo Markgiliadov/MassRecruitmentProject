@@ -106,7 +106,7 @@ body {
 .Images {
   /* padding-top: 7px; */
   height: 45%;
-  width: 180px;
+  width: 100%;
   padding: auto;
   align-content: center;
   border-radius: 10px;
@@ -361,7 +361,8 @@ body {
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
   padding: 6px;
-  background-color: rgb(125, 125, 134);
+  border-style: ridge;
+  background-color: rgb(70, 70, 77);
 }
 .movie_card:hover {
   -webkit-transform: scale(1.02);

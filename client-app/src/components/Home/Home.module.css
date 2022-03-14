@@ -1,7 +1,7 @@
 .projectList_wrap {
   display: flex;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5em;
+  grid-gap: 0.5em;
   padding: 2px;
 }
 
@@ -11,7 +11,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 200px) {
   .blogList-wrap {
     grid-template-columns: repeat(1, 1fr);
   }

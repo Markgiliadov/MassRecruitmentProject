@@ -5,12 +5,8 @@ import BarLoader from "react-spinners/BarLoader";
 import ClipLoader from "react-spinners/ClipLoader";
 import NotAvailableIcon from "../../Assets/NotAvailableEmailIcon/X-icon.png";
 import { useNavigate } from "react-router-dom";
-// import loginsidedrawer from "../../components/LoginSideDrawer/LoginSideDrawer";
-// import { FirebaseContext } from "../../FirebaseAuth/index";
 
 const Login = (props) => {
-  //   const { state, dispatch } = useContext(loginContext);
-  //   const Firebase = useContext(FirebaseContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,16 +14,6 @@ const Login = (props) => {
   const [emailAvailabilityLogo, setEmailAvailabilityLogo] = useState(null);
   const [loadingValidation, setLoadingValidation] = useState(false);
   let loginForm = null;
-
-  //   useEffect(() => {
-  //     const data = localStorage.getItem("JWT");
-
-  //     if (data) {
-  //       dispatch({ type: "setLoginSpinnerStatus", payload: false });
-  //       dispatch({ type: "loggedIn", loginStateTkn: data });
-  //       setUsername(localStorage.getItem("email"));
-  //     } else dispatch({ type: "loggedOut", loginStateTkn: null });
-  //   }, [dispatch]);
 
   const validateUserWithDB = async (username, password) => {
     const response = await fetch("http://localhost:1338/api/login", {
@@ -42,69 +28,33 @@ const Login = (props) => {
     const data = await response.json();
     if (data.user) {
       localStorage.setItem("token", data.user);
-      props.triggerLoginStatus();
-      // alert("Login successful");
-
+      console.log(data.auth);
+      props.triggerLoginStatus(data.auth);
       navigate("/");
+
+      // switch (data.auth) {
+      //   case "admin":
+      //     props.triggerLoginStatus("admin");
+      //     navigate("/");
+      //     break;
+      //   case "admin":
+      //     props.triggerLoginStatus("investor");
+      //     navigate("/");
+      //     break;
+      //   case "admin":
+      //     props.triggerLoginStatus("project_manager");
+      //     navigate("/");
+      //     break;
+      //   default:
+      //     break;
+      // }
+      // alert("Login successful");
     } else {
       alert("please check your username and password");
     }
 
     console.log(data);
   };
-
-  // let info = null;
-  // info = await db.collection("users").get();
-  // let checkifvalid = null;
-  // info.forEach((doc) => {
-  //   if (doc.data().email === username && doc.data().password === password) {
-  //     checkifvalid = true;
-  //     dispatch({ type: "setLoginSpinnerStatus", payload: true });
-  //     setEmailAvailabilityLogo(null);
-  //     setErrorMsgInvalid(null);
-  //     signInWithFirebase(username, password);
-  //     return true;
-  //   } else {
-  //     setLoadingValidation(false);
-  //     dispatch({ type: "setLoginSpinnerStatus", payload: false });
-  //   }
-  // });
-
-  //     if (!checkifvalid)
-  //       setErrorMsgInvalid(
-  //         <h2 className={classes.inputError}>
-  //           Error, Email address or username is not valid or does not exist.
-  //           Please add it and try again!
-  //         </h2>
-  //       );
-  //   };
-  //   const signInWithFirebase = (username, password) => {
-  //     console.log(" user is " + username, password);
-
-  //     Firebase.getAuth()
-  //       .signInWithEmailAndPassword(username, password)
-  //       .then((res) => {
-  //         console.log(res.user);
-  //         dispatch({ type: "setUsername", payload: username });
-  //         dispatch({ type: "setPassword", payload: password });
-  //         dispatch({
-  //           type: "loggedIn",
-
-  //           payload: { username: username, password: password },
-  //         });
-  //         res.user.getIdTokenResult(true).then((tk) => {
-  //           localStorage.setItem("JWT", tk.token);
-  //           dispatch({ type: "setJWT", payload: tk.token });
-  //           dispatch({ type: "setLoginSpinnerStatus", payload: false });
-  //           setPassword(() => "");
-  //           setUsername(() => "");
-  //           props.history.push("/");
-  //         });
-  //       })
-  //       .catch((res) => {
-  //         console.log("err " + res);
-  //       });
-  //   };
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoadingValidation(true);

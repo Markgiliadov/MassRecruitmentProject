@@ -84,7 +84,7 @@ const Home = () => {
   };
   let reProjects = null;
   if (projects) {
-    console.log(projects);
+    console.log(typeof projects);
     reProjects = projects.map((prjVal, index) => {
       console.log(prjVal.pictures[0]);
       return (

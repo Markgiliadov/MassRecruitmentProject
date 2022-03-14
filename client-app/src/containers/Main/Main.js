@@ -4,7 +4,7 @@ import Projects from "../Projects/Projects";
 import Home from "../../components/Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-
+import Administrator from "../Administrator/Administrator";
 // import Appforgag from "../../components/Movie/MovieInformation/Appforgag";
 // import loginContext from "../../Contexts/loginContext";
 const Main = (props) => {
@@ -14,6 +14,7 @@ const Main = (props) => {
     <>
       <Routes>
         <Route path="/" exact element={<Home />} />
+        <Route path="/Administrator" exact element={<Administrator />} />
         <Route path="/Projects" element={<Projects />} />
         <Route
           path="/Login"

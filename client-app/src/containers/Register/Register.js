@@ -13,6 +13,7 @@ const initialInputState = {
   password: "",
   name: "",
   phonenumber: "",
+  auth: "",
 };
 
 const Register = (props) => {
@@ -106,16 +107,21 @@ const Register = (props) => {
     e.preventDefault();
     const isInputValidated = inputValidation();
     if (
-      // isInputValidated === initialValidationStatus && // if all 4 error inputs don't contain errors
+      //isInputValidated === initialValidationStatus && // if all 4 error inputs don't contain errors
       user.email &&
-      user.password.length > 6 &&
+      user.password &&
       user.name &&
-      user.phonenumber.length >= 10
+      user.phonenumber
     ) {
       handleRegister(e);
     } else {
-      console.log(isInputValidated);
-      alert("you must enter correct!");
+      console.log(
+        user.email.length,
+        user.password.length,
+        user.name.length,
+        user.phonenumber.length
+      );
+      alert("you must enter correct input!");
     }
   };
   const inputValidation = () => {
@@ -135,6 +141,7 @@ const Register = (props) => {
         password: user.password,
         name: user.name,
         phonenumber: user.phonenumber,
+        auth: user.auth,
       }),
     });
 
@@ -181,6 +188,7 @@ const Register = (props) => {
   const checkDBforEmail = async () => {
     let emailavailable = null;
     let emailUnavailable = null;
+    console.log(user.email);
     const response = await fetch(
       "http://localhost:1338/api/registerEmailTest",
       {
@@ -194,7 +202,7 @@ const Register = (props) => {
 
     const data = await response.json();
     console.log(data.status);
-    if (data.status === "ok") {
+    if (!(data.status === "ok")) {
       setInputs("email", true, errorMessages.badEmail.emailUnavailable, true);
       handleEmailAvailabilityLogo(false);
     } else {
@@ -252,10 +260,11 @@ const Register = (props) => {
               setInputs("email", false);
               setLoadingEmail(true);
               setCheckEmailAvailabilityTrigger(
-                setTimeout(() => {
-                  checkDBforEmail(valueEn);
-                }, 1000)
+                // setTimeout(() => {
+                checkDBforEmail()
               );
+              // }, 1000)
+              // );
             } else {
               setInputs(
                 "email",
@@ -349,10 +358,18 @@ const Register = (props) => {
       setInputError({ ...inputError, [inputName]: "" });
     }
   };
+  useEffect(() => {
+    //here you will have correct value in userInput
+    console.log(user.email);
+    checkDBforEmail();
+  }, [user.email]);
   const handleInputChange = (e) => {
     let val = e.target.value;
     let vName = e.target.name;
-    setUser({ ...user, [vName]: val });
+    setUser({
+      ...user,
+      [vName]: val,
+    });
     validation(vName, val, e);
   };
 
@@ -427,6 +444,38 @@ const Register = (props) => {
             onChange={(e) => handleInputChange(e)}
           />
           {inputError.phonenumber}
+        </label>
+        <label className={classes.label}>
+          Type of user
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              // padding: "5%",
+              marginLeft: "15%",
+            }}
+          >
+            <input
+              // className={inputsStyles.phonenumber.join(" ")}
+              style={{ margin: "5%" }}
+              name="auth"
+              type="radio"
+              placeholder="Type"
+              value="investor"
+              onChange={(e) => handleInputChange(e)}
+            />
+            Investor
+            <input
+              // className={inputsStyles.phonenumber.join(" ")}
+              style={{ margin: "5%" }}
+              name="auth"
+              type="radio"
+              placeholder="Type"
+              value="Project Manager"
+              onChange={(e) => handleInputChange(e)}
+            />
+            Project Manager
+          </div>
         </label>
         <input
           type="submit"
