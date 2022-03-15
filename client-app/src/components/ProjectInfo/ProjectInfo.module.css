@@ -1,0 +1,213 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 70em;
+  margin: 2% auto;
+  padding: 1em 3em 2em 3em;
+  /* margin: 0em auto; */
+  background-color: white;
+  border-radius: br * 1.4;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  width: 100%;
+  padding: 0.8em;
+  line-height: 1.6;
+  /* background-color: grey-lightest; */
+  font-size: 30px;
+  font-weight: bold;
+}
+.info{
+    line-height: 1.6;
+  color: #8b8b8bf6;
+    font-size: 20px;
+   
+}
+
+body {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: grey-dark;
+  /* background-color: grey-light; */
+}
+
+.inputErrorInvisible {
+  height: -20px;
+}
+
+.edit{
+    /* position: relative; */
+      position: absolute;
+      bottom: 80px;
+      right: 200px;
+    background-color: #4CAF50;
+    border: none;
+    font-size: 28px;
+    color: #FFFFFF;
+    padding: 5px;
+    width: 150px;
+    text-align: center;
+    /* transition-duration: 0.4s; */
+    /* text-decoration: none; */
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.edit:hover {
+    color: white;
+    
+}
+.inputUnavailable {
+  font-size: 14px;
+  color: rgb(107, 57, 107);
+  border-radius: 16px;
+  text-align: center;
+  padding: 2px 2px;
+  padding-left: 3px;
+  margin-top: 8px;
+  transition-duration: 500ms;
+  transition-property: color;
+  transition-timing-function: ease-in-out;
+  visibility: visible;
+}
+
+.inputError {
+  font-size: 14px;
+
+  color: red;
+  border-radius: 16px;
+  text-align: center;
+  padding: 2px 2px;
+  padding-left: 3px;
+  margin-top: 8px;
+  transition-duration: 500ms;
+  transition-property: color;
+  transition-timing-function: ease-in-out;
+  visibility: visible;
+}
+
+.input {
+  width: 100%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: grey-lightest;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.inputChange {
+  border: 1.05px solid rgb(0, 60, 255);
+}
+
+.inputChangeError {
+  border: 1.05px solid red;
+}
+
+.inputChangeUnavailable {
+  border: 1.05px solid rgb(107, 57, 107);
+}
+
+.inputNotChange {
+  height: 30%;
+  color: orange;
+}
+
+.inputOnFocus {
+  color: cyan;
+}
+
+.submit {
+  display: block;
+  padding: 1.15em 4em;
+  border: 0.1em solid #ffffff;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  transition: all 0.4s;
+  background-color: gray;
+}
+
+.submit:hover {
+  border: 0.4em solid #706464;
+  color: #ffffff;
+  transform: scale(1.02);
+  background-color: #271d1d;
+  border: 0.1em solid black;
+}
+
+.xicon {
+  width: 4.5%;
+  height: 4%;
+  border-radius: 50%;
+  display: block;
+  padding-top: 0.5%;
+  animation: 0.2s ease-in-out 0.1s forwards, scale 0.2s ease-in-out 0.2s both;
+  transition-delay: 10s;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: none;
+  animation: stroke 0.1s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark {
+  width: 5%;
+  height: 4%;
+  border-radius: 80%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px #7ac142;
+  animation: fill 0.3s ease-in-out 0.1s forwards,
+    scale 0.3s ease-in-out 0.3s both;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
+}
+.imagesProject{
+    height: 100%;
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+
+  0%,
+  100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.4, 1.4, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
+  }
+}
