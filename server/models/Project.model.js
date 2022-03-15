@@ -11,6 +11,7 @@ const Project = new mongoose.Schema(
     video: { type: String, required: true },
     pictures: { type: [picture], required: true },
     amount: { type: Number, required: true },
+    endDate: { type: Date, require: true },
     status: { type: String, required: false },
   },
   { collection: "projects-data" }

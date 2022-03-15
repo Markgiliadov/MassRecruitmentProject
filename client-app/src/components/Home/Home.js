@@ -95,6 +95,7 @@ const Home = () => {
             video={prjVal.video}
             pictures={prjVal.pictures}
             amount={prjVal.amount}
+            endDate={prjVal.endDate}
             date={getCurrDate()}
           />
         </div>

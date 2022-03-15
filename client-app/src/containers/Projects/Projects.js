@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Projects.module.css";
 import { useNavigate } from "react-router-dom";
+// import DatePicker from "../../components/DatePicker/DatePiker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const initialInputState = {
   titleProject: "",
   idea: "",
+  statusProject: "Started",
   video: "",
   pictures: [],
   amount: 0,
+  endDate: "",
 };
 
 const wt_decode = (token) => {
@@ -20,6 +25,7 @@ const Projects = () => {
   const [projects, setProjects] = useState("");
   const [tempProjects, setTempProjects] = useState("");
   const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const initialInputStyle = [classes.input, ""];
   const [project, setProject] = useState(initialInputState);
@@ -63,9 +69,11 @@ const Projects = () => {
     console.log(
       "before adding to db:" + project.titleProject,
       project.idea,
+      project.statusProject,
       project.video,
       project.pictures,
-      project.amount
+      project.amount,
+      project.endDate
     );
     const req = await fetch("http://localhost:1338/api/projects", {
       method: "POST",
@@ -76,9 +84,11 @@ const Projects = () => {
       body: JSON.stringify({
         titleProject: project.titleProject,
         idea: project.idea,
+        statusProject: project.statusProject,
         video: project.video,
         pictures: project.pictures,
         amount: project.amount,
+        endDate: project.endDate,
       }),
     });
     console.log(req);
@@ -206,6 +216,17 @@ const Projects = () => {
             onChange={(e) => handleInputChange(e)}
           />
           {/* {inputError.phonenumber} */}
+        </label>
+
+        <label className={classes.label}>
+          Set end date :
+          <DatePicker
+            name="endDate"
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+
+            // value={project.endDate}
+          />
         </label>
         <input
           type="submit"

@@ -153,6 +153,7 @@ app.post("/api/projects", async (req, res) => {
           img_description: "NONE",
         },
         amount: req.body.amount,
+        endDate: req.body.endDate,
       });
       return res.json({ status: "ok" });
     }

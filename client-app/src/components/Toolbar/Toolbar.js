@@ -44,11 +44,8 @@ const Toolbar = (props) => {
           <NavLink className={classes.button1} to={{ pathname: "/Register" }}>
             Register
           </NavLink>
-          <NavLink
-            className={classes.button1}
-            to={{ pathname: "/ProjectInfo" }}
-          >
-            Info
+          <NavLink className={classes.button1} to={{ pathname: "/Investor" }}>
+            Investor
           </NavLink>
         </>
       ) : (
