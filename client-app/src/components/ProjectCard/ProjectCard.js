@@ -57,6 +57,15 @@ const Project = (props) => {
         >
           Visit Project Page
         </NavLink>
+        <NavLink
+          className={classes.button1}
+          state={{ projectDetails: props }}
+          to={{
+            pathname: `/AddNewProject/${props.titleProject}`,
+          }}
+        >
+          Edit project
+        </NavLink>
       </footer>
     </div>
   );

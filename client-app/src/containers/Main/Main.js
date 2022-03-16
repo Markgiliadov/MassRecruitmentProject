@@ -24,7 +24,7 @@ const Main = (props) => {
         />
         <Route path="/Register" element={<Register />} />
         <Route exact path="/ProjectDetails/:id" element={<ProjectDetails />} />
-
+        <Route exact path="/AddNewProject/:id" element={<AddNewProject />} />
         {/* <Route path="/:id" render={(props) => <Appforgag {...props} />} /> */}
         {/* <Route path="" exact element={Home} /> */}
         {/* <Route path="*" render={(props) => <Register {...props} />} /> */}

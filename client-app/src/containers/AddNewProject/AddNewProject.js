@@ -5,6 +5,8 @@ import Moment from "moment";
 // import DatePicker from "../../components/DatePicker/DatePiker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useLocation } from "react-router-dom";
+import ProjectDetails from "../../components/ProjectDetails/ProjectDetails";
 const initialInputState = {
   titleProject: "",
   idea: "",
@@ -28,17 +30,21 @@ const Projects = () => {
   const [tempProjects, setTempProjects] = useState("");
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(null);
-
+  const { state } = useLocation();
   const initialInputStyle = [classes.input, ""];
   const [project, setProject] = useState(initialInputState);
 
   useEffect(async () => {
     const token = localStorage.getItem("token");
-
-    console.log(token);
+    console.log(state);
+    // console.log(token);
     if (token) {
       const user = wt_decode(token);
-      console.log(user);
+      console.log(state.projectDetails);
+      setProject({
+        ...project,
+        titleProject: state.projectDetails.titleProject,
+      });
       if (!user) {
         localStorage.removeItem("token");
         navigate.replace("/Login");
