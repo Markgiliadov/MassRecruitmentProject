@@ -68,24 +68,6 @@ app.post("/api/login", async (req, res) => {
   } else return res.json({ status: "error", user: false });
 });
 
-app.get("/api/projects", async (req, res) => {
-  // const token = req.headers["x-access-token"];
-  try {
-    // const decoded = jwt.verify(token, "secret123");
-    // const email = decoded.email;
-    // const user = await User.findOne({ email: email });
-    Project.find({}, (error, projects) => {
-      let projectArr = [];
-      projects.forEach((pr) => {
-        projectArr.push(pr);
-      });
-      return res.json({ status: "ok", projects: projectArr });
-    });
-  } catch (error) {
-    res.json({ status: "error", error: "invalid token" });
-  }
-});
-
 app.get("/api/users", async (req, res) => {
   const token = req.headers["x-access-token"];
   try {
@@ -161,6 +143,26 @@ app.get("/api/users", async (req, res) => {
 //     res.json({ status: "error", error: "invalid token" });
 //   }
 // });
+
+app.get("/api/projects", async (req, res) => {
+  // const token = req.headers["x-access-token"];
+  const projectType = req.get("Project-Type");
+  console.log(projectType);
+  try {
+    // const decoded = jwt.verify(token, "secret123");
+    // const email = decoded.email;
+    // const user = await User.findOne({ email: email });
+    Project.find({ status: projectType }, (error, projects) => {
+      let projectArr = [];
+      projects.forEach((pr) => {
+        projectArr.push(pr);
+      });
+      return res.json({ status: "ok", projects: projectArr });
+    });
+  } catch (error) {
+    res.json({ status: "error", error: "invalid token" });
+  }
+});
 app.post("/api/projects", async (req, res) => {
   const token = req.headers["x-access-token"];
   try {

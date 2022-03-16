@@ -12,11 +12,11 @@ const Project = new mongoose.Schema(
     pictures: { type: [picture], required: true },
     amount: { type: Number, required: true },
     endDate: { type: Date, require: true },
-    // status: {
-    //   type: String,
-    //   enum: ["in-progress", "completed", "unwanted"],
-    //   default: "investor",
-    // },
+    status: {
+      type: String,
+      enum: ["in-progress", "completed", "incomplete"],
+      default: "in-progress",
+    },
   },
   { collection: "projects-data" }
 );
