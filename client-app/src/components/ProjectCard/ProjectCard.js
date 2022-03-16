@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from "./ProjectCard.module.css";
 import Status from "../Status/Status";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import { NavLink } from "react-router-dom";
 
 const Project = (props) => {
   let prjPics = null;
@@ -26,14 +27,16 @@ const Project = (props) => {
         <p>created at {props.date}</p>
       </div>
       {/* {prjPics} */}
-      <p className={classes.movie_desc}> video {props.video}</p>
+      <p className={classes.movie_desc}>
+        <a href={props.video}>Link to video</a>
+      </p>
       <text className={classes.text} value={props.idea} />
       <p className={classes.movie_social}> Amount to collect {props.amount}</p>
       <footer>
         <div className="create-info">
           <div>
             <ProgressBar value={60} max={100} />
-            <p>finish date: {props.date} </p>
+            <p>Ending at: {props.date} </p>
           </div>
         </div>
       </footer>
