@@ -198,10 +198,9 @@ app.put("/api/projects", async (req, res) => {
     // const email = decoded.email;
     // const user = await User.findOne({ email: email });
     // if (user) {
-    console.log("canceled");
     await Project.findOneAndUpdate(
       { titleProject: req.body.titleProject },
-      { status: req.body.newStatus },
+      { $set: { amountStart: req.body.newAmount } },
       () => {
         if (err) return res.send(500, { error: err });
         return res.send("Succesfully saved.");
