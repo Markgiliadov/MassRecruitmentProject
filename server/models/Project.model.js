@@ -6,13 +6,14 @@ const picture = new mongoose.Schema({
 });
 const Project = new mongoose.Schema(
   {
-    titleProject: { type: String, required: true },
+    titleProject: { type: String, required: true, unique: true },
     idea: { type: String, required: true },
     video: { type: String, required: true },
     pictures: { type: [picture], required: true },
     amountStart: { type: Number, required: true },
     amountEnd: { type: Number, required: true },
     endDate: { type: Date, require: true },
+    createdDate: { type: Date, require: true },
     status: {
       type: String,
       enum: ["in-progress", "completed", "incomplete"],

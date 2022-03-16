@@ -181,6 +181,7 @@ app.post("/api/projects", async (req, res) => {
         },
         amountStart: req.body.amountStart,
         amountEnd: req.body.amountEnd,
+        createdDate: req.body.createdDate,
         endDate: req.body.endDate,
       });
       return res.json({ status: "ok" });
@@ -190,7 +191,29 @@ app.post("/api/projects", async (req, res) => {
     res.json({ status: "error", error: "invalid token" });
   }
 });
-
+app.put("/api/projects", async (req, res) => {
+  // const token = req.headers["x-access-token"];
+  try {
+    // const decoded = jwt.verify(token, "secret123");
+    // const email = decoded.email;
+    // const user = await User.findOne({ email: email });
+    // if (user) {
+    console.log("canceled");
+    await Project.findOneAndUpdate(
+      { titleProject: req.body.titleProject },
+      { status: req.body.newStatus },
+      () => {
+        if (err) return res.send(500, { error: err });
+        return res.send("Succesfully saved.");
+      }
+    );
+    return res.json({ status: "ok" });
+    // }
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "error", error: "invalid token" });
+  }
+});
 app.listen(1338, () => {
   console.log("Server started on 1338");
 });
