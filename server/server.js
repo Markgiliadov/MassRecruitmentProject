@@ -137,6 +137,30 @@ app.get("/api/users", async (req, res) => {
 //   }
 // });
 
+// app.post("/api/projects", async (req, res) => {
+//   const token = req.headers["x-access-token"];
+//   try {
+//     const decoded = jwt.verify(token, "secret123");
+//     const email = decoded.email;
+//     const user = await User.findOne({ email: email });
+//     if (user) {
+//       const data = await Project.create({
+//         titleProject: req.body.titleProject,
+//         idea: req.body.idea,
+//         video: req.body.video,
+//         pictures: {
+//           img_url: req.body.pictures,
+//           img_description: "NONE",
+//         },
+//         amount: req.body.amount,
+//       });
+//       return res.json({ status: "ok" });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.json({ status: "error", error: "invalid token" });
+//   }
+// });
 app.post("/api/projects", async (req, res) => {
   const token = req.headers["x-access-token"];
   try {
@@ -144,6 +168,7 @@ app.post("/api/projects", async (req, res) => {
     const email = decoded.email;
     const user = await User.findOne({ email: email });
     if (user) {
+      console.log("endDate: " + req.body.endDate);
       const data = await Project.create({
         titleProject: req.body.titleProject,
         idea: req.body.idea,
