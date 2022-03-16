@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from "./ProjectCard.module.css";
 import Status from "../Status/Status";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import Button from "../Button/Button";
 import { NavLink } from "react-router-dom";
 
 const Project = (props) => {
@@ -17,9 +18,9 @@ const Project = (props) => {
       );
     });
   }
-  console.log(props.titleProject);
   return (
     <div className={classes.movie_card}>
+      {/* <NavLink to=""/> */}
       <img className={classes.Images} src={props.pictures[0].img_url} alt="" />
       <Status label="Finished" />
       <h3 className={classes.movie_header}>{props.titleProject}</h3>
@@ -31,7 +32,9 @@ const Project = (props) => {
         <a href={props.video}>Link to video</a>
       </p>
       <text className={classes.text} value={props.idea} />
-      <p className={classes.movie_social}> Amount to collect {props.amount}</p>
+      <p className={classes.movie_social}>
+        Amount to collect {props.amountStart}
+      </p>
       <footer>
         <div className="create-info">
           <div>
@@ -39,18 +42,16 @@ const Project = (props) => {
             <p>Ending at: {props.date} </p>
           </div>
         </div>
+        <NavLink
+          className={classes.button1}
+          // exact
+          // activeStyle={{ backgroundColor: "red" }}
+          to={{ pathname: "/AddProject" }}
+        >
+          Visit Project Page
+        </NavLink>
       </footer>
     </div>
-    // <div className={classes.container}>
-    //   <div className={classes.movie_card}>
-    //     <div className={classes.movie_header}>
-    //       <img className={classes.Images} src={props.image} alt="Movie" />
-    //     </div>
-    //     <div className={classes.movie_content}>
-    //       <div className={classes.movie_content_header}></div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 export default Project;

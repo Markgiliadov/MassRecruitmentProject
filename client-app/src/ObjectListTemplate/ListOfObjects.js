@@ -1,6 +1,6 @@
 import React from "react";
 import UserTemplateCard from "./UserTemplateCard";
-import ProjectTemplateCard from "./ProjectTemplateCard";
+import Project from "../components/ProjectCard/ProjectCard";
 const ListOfObjects = (data) => {
   let newArr = null;
   if (Object.values(data)) {
@@ -10,10 +10,10 @@ const ListOfObjects = (data) => {
       return (
         <div key={index}>
           {"auth" in objData ? (
-            <UserTemplateCard userData={objData} />
-          ) : (
-            <ProjectTemplateCard projectData={objData} />
-          )}
+            <>
+              <UserTemplateCard userData={objData} />
+            </>
+          ) : null}
         </div>
       );
     });

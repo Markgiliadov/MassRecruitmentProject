@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import classes from "./Projects.module.css";
+import classes from "./AddNewProject.module.css";
 import { useNavigate } from "react-router-dom";
 import Moment from "moment";
 // import DatePicker from "../../components/DatePicker/DatePiker";
@@ -11,7 +11,8 @@ const initialInputState = {
   statusProject: "Started",
   video: "",
   pictures: [],
-  amount: 0,
+  amountStart: 0,
+  amountEnd: 0,
   endDate: "",
 };
 
@@ -83,7 +84,8 @@ const Projects = () => {
         statusProject: project.statusProject,
         video: project.video,
         pictures: project.pictures,
-        amount: project.amount,
+        amountStart: project.amountStart,
+        amountEnd: project.amountEnd,
         endDate: project.endDate,
       }),
     });
@@ -212,10 +214,22 @@ const Projects = () => {
           Amount to reach
           <input
             className={initialInputStyle}
-            name="amount"
+            name="amountEnd"
             type="number"
-            placeholder="Amount"
-            value={project.amount}
+            placeholder="Amount to reach"
+            value={project.amountEnd}
+            onChange={(e) => handleInputChange(e)}
+          />
+          {/* {inputError.phonenumber} */}
+        </label>
+        <label className={classes.label}>
+          Would you like to invest? (Optional) Please enter amount:
+          <input
+            className={initialInputStyle}
+            name="amountStart"
+            type="number"
+            placeholder="Amount to reach"
+            value={project.amountStart}
             onChange={(e) => handleInputChange(e)}
           />
           {/* {inputError.phonenumber} */}

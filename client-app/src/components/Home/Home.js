@@ -1,9 +1,9 @@
 // import React, { useState, useEffect } from "react";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import classes from "./Home.module.css";
 // import jwt from "jsonwebtoken";
-import Project from "../ProjectCard/ProjectCard";
+import ProjectCard from "../ProjectCard/ProjectCard";
 import moment from "moment";
 import e from "cors";
 
@@ -118,12 +118,12 @@ const Home = () => {
       console.log(getFormattedDate(prjVal.endDate));
       return (
         <div key={prjVal._id}>
-          <Project
+          <ProjectCard
             titleProject={prjVal.titleProject}
             idea={prjVal.idea}
             video={prjVal.video}
             pictures={prjVal.pictures}
-            amount={prjVal.amount}
+            amountStart={prjVal.amountStart}
             endDate={prjVal.endDate}
             date={getFormattedDate(prjVal.endDate)}
           />
@@ -137,12 +137,12 @@ const Home = () => {
       console.log(prjVal.pictures[0]);
       return (
         <div key={prjVal._id}>
-          <Project
+          <ProjectCard
             titleProject={prjVal.titleProject}
             idea={prjVal.idea}
             video={prjVal.video}
             pictures={prjVal.pictures}
-            amount={prjVal.amount}
+            amountStart={prjVal.amountStart}
             endDate={prjVal.endDate}
             date={prjVal.endDate}
           />
@@ -156,15 +156,17 @@ const Home = () => {
       console.log(prjVal.pictures[0]);
       return (
         <div key={prjVal._id}>
-          <Project
-            titleProject={prjVal.titleProject}
-            idea={prjVal.idea}
-            video={prjVal.video}
-            pictures={prjVal.pictures}
-            amount={prjVal.amount}
-            endDate={prjVal.endDate}
-            date={prjVal.endDate}
-          />
+          <NavLink to={{ pathname: "/AddProject" }}>
+            <ProjectCard
+              titleProject={prjVal.titleProject}
+              idea={prjVal.idea}
+              video={prjVal.video}
+              pictures={prjVal.pictures}
+              amountStart={prjVal.amountStart}
+              endDate={prjVal.endDate}
+              date={prjVal.endDate}
+            />
+          </NavLink>
         </div>
       );
     });
@@ -172,11 +174,17 @@ const Home = () => {
   return (
     <>
       <h1 className={classes.h1}>In-progress projects</h1>
-      <div className={classes.projectList_wrap}>{inProgressProjects}</div>
+      <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
+        {inProgressProjects}
+      </div>
       <h1 className={classes.h1}>Incomplete projects</h1>
-      <div className={classes.projectList_wrap}>{incompleteProjects}</div>
+      <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
+        {incompleteProjects}
+      </div>
       <h1 className={classes.h1}>Completed projects</h1>
-      <div className={classes.projectList_wrap}>{completeProjects}</div>
+      <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
+        {completeProjects}
+      </div>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import AddProject from "../Projects/Projects";
+import AddNewProject from "../AddNewProject/AddNewProject";
 import Home from "../../components/Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
@@ -17,7 +17,7 @@ const Main = (props) => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/Administrator" exact element={<Administrator />} />
-        <Route path="/AddProject" element={<AddProject />} />
+        <Route path="/AddNewProject" element={<AddNewProject />} />
         <Route path="/Investor" element={<Investor />} />
         <Route
           path="/Login"

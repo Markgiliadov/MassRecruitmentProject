@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import classes from "./Administrator.module.css";
 import ListOfObjects from "../../ObjectListTemplate/ListOfObjects";
+import Home from "../../components/Home/Home";
 
 const Administrator = (props) => {
   const [tempArr, setTempArr] = useState([]);
@@ -48,8 +49,9 @@ const Administrator = (props) => {
         {/* : <>None</>} */}
       </div>
       <h1 className={classes.h1}>List of projects</h1>
-      <div style={{ display: "flex", overflowX: "scroll" }}>
+      <div>
         <ListOfObjects data={projects} />
+        <Home />
       </div>
     </>
   );

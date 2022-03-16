@@ -44,7 +44,7 @@ const Toolbar = (props) => {
           className={classes.button1}
           // exact
           // activeStyle={{ backgroundColor: "red" }}
-          to={{ pathname: "/AddProject" }}
+          to={{ pathname: "/AddNewProject" }}
         >
           Add new project
         </NavLink>
