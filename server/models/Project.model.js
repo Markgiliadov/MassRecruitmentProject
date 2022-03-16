@@ -10,7 +10,8 @@ const Project = new mongoose.Schema(
     idea: { type: String, required: true },
     video: { type: String, required: true },
     pictures: { type: [picture], required: true },
-    amount: { type: Number, required: true },
+    amountStart: { type: Number, required: true },
+    amountEnd: { type: Number, required: true },
     endDate: { type: Date, require: true },
     status: {
       type: String,
