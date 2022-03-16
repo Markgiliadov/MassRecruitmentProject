@@ -12,32 +12,63 @@ const ProjectDetails = () => {
 
   const handlePutRequest = async (e) => {
     e.preventDefault();
-    if (
-      amountEntered + state.projectDetails.amountStart >=
-      state.projectDetails.amountEnd
-    ) {
+    if (amountEntered <= 0) {
+      alert("you must enter positive value!");
+    } else if (
+      Number(amountEntered) + Number(state.projectDetails.amountStart) >
+      Number(state.projectDetails.amountEnd)
+    )
+      alert(
+        "You added too much money! try again" +
+          amountEntered +
+          state.projectDetails.amountStart +
+          " v" +
+          state.projectDetails.amountEnd
+      );
+    else {
+      let req = null;
+      if (
+        amountEntered + state.projectDetails.amountStart ===
+        state.projectDetails.amountEnd
+      ) {
+        req = await fetch("http://localhost:1338/api/projects", {
+          method: "PUT",
+          headers: {
+            "Access-Control-Allow-Headers": "X-Requested-With",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            titleProject: state.projectDetails.titleProject,
+            newStatus: "completed",
+            newAmount:
+              Number(state.projectDetails.amountStart) + Number(amountEntered),
+          }),
+        });
+      } else {
+        {
+          req = await fetch("http://localhost:1338/api/projects", {
+            method: "PUT",
+            headers: {
+              "Access-Control-Allow-Headers": "X-Requested-With",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              titleProject: state.projectDetails.titleProject,
+              newStatus: "in-progress",
+              newAmount:
+                Number(state.projectDetails.amountStart) +
+                Number(amountEntered),
+            }),
+          });
+        }
+      }
+      const data = await req.json();
+      if (data.status === "ok") {
+        return data.projects;
+      } else {
+        alert(data.error);
+      }
     }
-    const req = await fetch("http://localhost:1338/api/projects", {
-      method: "PUT",
-      headers: {
-        // "Access-Control-Allow-Headers": "X-Requested-With",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        titleProject: state.projectDetails.titleProject,
-        newStatus: "completed",
-      }),
-    });
-    console.log(req);
-    const data = await req.json();
-    console.log(data);
-    if (data.status === "ok") {
-      console.log(data.projects);
-      return data.projects;
-    } else {
-      alert(data.error);
-    }
-    console.log(data);
   };
   return (
     <div>
@@ -74,7 +105,7 @@ const ProjectDetails = () => {
         </label>
         <input
           className={classes.input}
-          type="text"
+          type="number"
           placeholder="Enter amount wanted"
           value={amountEntered}
           onChange={(event) => {
