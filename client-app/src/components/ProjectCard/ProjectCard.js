@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import classes from "./Project.module.css";
+import classes from "./ProjectCard.module.css";
 import Status from "../Status/Status";
 import ProgressBar from "../ProgressBar/ProgressBar";
 

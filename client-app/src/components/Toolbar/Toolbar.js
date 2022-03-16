@@ -19,70 +19,82 @@ const Toolbar = (props) => {
   return (
     <div className={classes.Toolbar}>
       {/* <Logo /> */}
+      {/* Hello <span className={classes.text}>Hello {props.loginAuth}</span> */}
+      <div
+        style={{
+          display: "flex",
+          alignContent: "center",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {props.loginStatus ? (
+          <span className={classes.text}>Hello {props.loginAuth}</span>
+        ) : null}
 
-      <NavLink
-        className={classes.button1}
-        // exact
-        // activeStyle={{ backgroundColor: "red" }}
-        to={{ pathname: "/" }}
-      >
-        Home
-      </NavLink>
-      <NavLink
-        className={classes.button1}
-        // exact
-        // activeStyle={{ backgroundColor: "red" }}
-        to={{ pathname: "/Projects" }}
-      >
-        Projects
-      </NavLink>
-      {!props.loginStatus ? (
-        <>
-          <NavLink className={classes.button1} to={{ pathname: "/Login" }}>
-            Sign in
-          </NavLink>
-          <NavLink className={classes.button1} to={{ pathname: "/Register" }}>
-            Register
-          </NavLink>
-          <NavLink className={classes.button1} to={{ pathname: "/Investor" }}>
-            Investor
-          </NavLink>
-        </>
-      ) : (
-        <>
-          {props.loginAuth === "admin" ? (
-            <NavLink
-              className={classes.button1}
-              // exact
-              // activeStyle={{ backgroundColor: "red" }}
-              to={{ pathname: "/Administrator" }}
-            >
-              Administrator
+        <NavLink
+          className={classes.button1}
+          // exact
+          // activeStyle={{ backgroundColor: "red" }}
+          to={{ pathname: "/" }}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          className={classes.button1}
+          // exact
+          // activeStyle={{ backgroundColor: "red" }}
+          to={{ pathname: "/AddProject" }}
+        >
+          Add new project
+        </NavLink>
+        {!props.loginStatus ? (
+          <>
+            <NavLink className={classes.button1} to={{ pathname: "/Login" }}>
+              Sign in
             </NavLink>
-          ) : null}
-          <Button
-            className={classes.button1}
-            style={{
-              cursor: "pointer",
-              height: "52px",
-              paddingBottom: "1.05em",
-              marginRight: "0.7em",
-              // fontWeight: "400",
-              fontSize: "14px",
-            }}
-            myFunction={props.signOut}
-            name="Sign Out"
-          />
+            <NavLink className={classes.button1} to={{ pathname: "/Register" }}>
+              Register
+            </NavLink>
+            <NavLink className={classes.button1} to={{ pathname: "/Investor" }}>
+              Investor
+            </NavLink>
+          </>
+        ) : (
+          <>
+            {props.loginAuth === "admin" ? (
+              <NavLink
+                className={classes.button1}
+                // exact
+                // activeStyle={{ backgroundColor: "red" }}
+                to={{ pathname: "/Administrator" }}
+              >
+                Administrator
+              </NavLink>
+            ) : null}
+            <Button
+              className={classes.button1}
+              style={{
+                cursor: "pointer",
+                height: "52px",
+                paddingBottom: "1.05em",
+                marginRight: "0.7em",
+                // fontWeight: "400",
+                fontSize: "14px",
+              }}
+              myFunction={props.signOut}
+              name="Sign Out"
+            />
+            {/* <div className={classes.container}> */}
 
-          <div className={classes.container}>
-            Hello <span className={classes.text}>{props.loginAuth}</span>
-          </div>
-        </>
-      )}
-      {/* 
+            {/* </div> */}
+          </>
+        )}
+        {/* 
       <NavLink className={classes.button1} to={{ pathname: "/About" }}>
         About
       </NavLink> */}
+      </div>
     </div>
   );
 };

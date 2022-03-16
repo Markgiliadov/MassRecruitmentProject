@@ -16,3 +16,14 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+.h1 {
+  color: #111;
+  background-color: #aca99e;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 0.4;
+  text-align: center;
+  padding: 0.65%;
+}

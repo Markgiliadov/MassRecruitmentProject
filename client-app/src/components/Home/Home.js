@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./Home.module.css";
 // import jwt from "jsonwebtoken";
-import Project from "../Project/Project";
+import Project from "../ProjectCard/ProjectCard";
 import e from "cors";
 
 const wt_decode = (token) => {
@@ -104,6 +104,11 @@ const Home = () => {
   }
   return (
     <>
+      <h1 className={classes.h1}>In-progress projects</h1>
+      <div className={classes.projectList_wrap}>{reProjects}</div>
+      <h1 className={classes.h1}>Unwanted projects</h1>
+      <div className={classes.projectList_wrap}>{reProjects}</div>
+      <h1 className={classes.h1}>Completed projects</h1>
       <div className={classes.projectList_wrap}>{reProjects}</div>
     </>
   );

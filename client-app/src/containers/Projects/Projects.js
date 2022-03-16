@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Projects.module.css";
 import { useNavigate } from "react-router-dom";
+import Moment from "moment";
 // import DatePicker from "../../components/DatePicker/DatePiker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -46,6 +47,9 @@ const Projects = () => {
       }
     }
   }, []);
+  useEffect(() => {
+    console.log(project.endDate);
+  }, [project.endDate]);
 
   const checkJWT = async () => {
     console.log("entering jwt");
@@ -66,15 +70,7 @@ const Projects = () => {
     console.log(data);
   };
   const addOrUpdateProject = async () => {
-    console.log(
-      "before adding to db:" + project.titleProject,
-      project.idea,
-      project.statusProject,
-      project.video,
-      project.pictures,
-      project.amount,
-      project.endDate
-    );
+    console.log("before adding to db:" + project.endDate);
     const req = await fetch("http://localhost:1338/api/projects", {
       method: "POST",
       headers: {
@@ -103,6 +99,13 @@ const Projects = () => {
     }
   };
 
+  const handleDateChanged = (date) => {
+    const offsetDate = new Date(
+      date.getTime() - date.getTimezoneOffset() * 60000
+    );
+    console.log(offsetDate);
+    setProject({ ...project, endDate: offsetDate });
+  };
   const handleInputChange = (e) => {
     let val = e.target.value;
     let vName = e.target.name;
@@ -222,8 +225,10 @@ const Projects = () => {
           Set end date :
           <DatePicker
             name="endDate"
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
+            // type={DatePicker}
+            selected={project.endDate}
+            value={project.endDate}
+            onChange={(date) => handleDateChanged(date)}
 
             // value={project.endDate}
           />
