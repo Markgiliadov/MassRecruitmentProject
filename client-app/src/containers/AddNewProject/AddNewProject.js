@@ -48,6 +48,16 @@ const Projects = () => {
       }
     }
   }, []);
+  const getCurrDate = () => {
+    const today = new Date();
+    return (
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      (today.getDate() + 1)
+    );
+  };
   useEffect(() => {
     console.log(project.endDate);
   }, [project.endDate]);
@@ -86,6 +96,7 @@ const Projects = () => {
         pictures: project.pictures,
         amountStart: project.amountStart,
         amountEnd: project.amountEnd,
+        createdDate: getCurrDate(),
         endDate: project.endDate,
       }),
     });

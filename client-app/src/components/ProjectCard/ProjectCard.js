@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import classes from "./ProjectCard.module.css";
 import Status from "../Status/Status";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import Button from "../Button/Button";
 import { NavLink } from "react-router-dom";
 
 const Project = (props) => {
@@ -20,33 +19,41 @@ const Project = (props) => {
   }
   return (
     <div className={classes.movie_card}>
-      {/* <NavLink to=""/> */}
       <img className={classes.Images} src={props.pictures[0].img_url} alt="" />
-      <Status label="Finished" />
-      <h3 className={classes.movie_header}>{props.titleProject}</h3>
+      <Status label={props.status} />
+      <h1 style={{ fontSize: "20px" }} className={classes.movie_header}>
+        {props.titleProject}
+      </h1>
       <div className={classes.locandina}>
-        <p>created at {props.date}</p>
+        <p>
+          created at <strong> {props.createdDate}</strong>
+        </p>
       </div>
-      {/* {prjPics} */}
       <p className={classes.movie_desc}>
-        <a href={props.video}>Link to video</a>
+        <a href={"http://" + props.video}>Link to video</a>
       </p>
       <text className={classes.text} value={props.idea} />
       <p className={classes.movie_social}>
-        Amount to collect {props.amountStart}
+        Amount to collect{" "}
+        {props.amountEnd - props.amountStart > 0
+          ? props.amountEnd - props.amountStart
+          : null}
+        $
       </p>
+
       <footer>
         <div className="create-info">
           <div>
-            <ProgressBar value={60} max={100} />
+            <ProgressBar value={props.amountStart} max={props.amountEnd} />
             <p>Ending at: {props.date} </p>
           </div>
         </div>
         <NavLink
           className={classes.button1}
-          // exact
-          // activeStyle={{ backgroundColor: "red" }}
-          to={{ pathname: "/AddProject" }}
+          state={{ projectDetails: props }}
+          to={{
+            pathname: `/ProjectDetails/${props.titleProject}`,
+          }}
         >
           Visit Project Page
         </NavLink>

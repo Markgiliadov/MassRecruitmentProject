@@ -29,10 +29,6 @@ const Administrator = (props) => {
     const dataUsers = await reqUsers.json();
     const dataProjects = await reqProjects.json();
     if (dataUsers.status === "ok") {
-      console.log(dataProjects.projects);
-      console.log(dataUsers.users);
-      console.log(typeof dataProjects.projects);
-      console.log(typeof dataUsers.users);
       setUsers(dataUsers.users);
       if (dataProjects.status === "ok") setProjects(dataProjects.projects);
     } else {
@@ -44,13 +40,10 @@ const Administrator = (props) => {
     <>
       <h1 className={classes.h1}>List of users</h1>
       <div style={{ display: "flex", overflowX: "scroll" }}>
-        {/* {users ?  */}
         <ListOfObjects data={users} />
-        {/* : <>None</>} */}
       </div>
       <h1 className={classes.h1}>List of projects</h1>
       <div>
-        <ListOfObjects data={projects} />
         <Home />
       </div>
     </>

@@ -124,6 +124,9 @@ const Home = () => {
             video={prjVal.video}
             pictures={prjVal.pictures}
             amountStart={prjVal.amountStart}
+            amountEnd={prjVal.amountEnd}
+            status={prjVal.status}
+            createdDate={prjVal.createdDate}
             endDate={prjVal.endDate}
             date={getFormattedDate(prjVal.endDate)}
           />
@@ -143,8 +146,11 @@ const Home = () => {
             video={prjVal.video}
             pictures={prjVal.pictures}
             amountStart={prjVal.amountStart}
+            amountEnd={prjVal.amountEnd}
+            status={prjVal.status}
+            createdDate={getFormattedDate(prjVal.createdDate)}
             endDate={prjVal.endDate}
-            date={prjVal.endDate}
+            date={getFormattedDate(prjVal.endDate)}
           />
         </div>
       );
@@ -156,32 +162,36 @@ const Home = () => {
       console.log(prjVal.pictures[0]);
       return (
         <div key={prjVal._id}>
-          <NavLink to={{ pathname: "/AddProject" }}>
-            <ProjectCard
-              titleProject={prjVal.titleProject}
-              idea={prjVal.idea}
-              video={prjVal.video}
-              pictures={prjVal.pictures}
-              amountStart={prjVal.amountStart}
-              endDate={prjVal.endDate}
-              date={prjVal.endDate}
-            />
-          </NavLink>
+          <ProjectCard
+            titleProject={prjVal.titleProject}
+            idea={prjVal.idea}
+            video={prjVal.video}
+            pictures={prjVal.pictures}
+            amountStart={prjVal.amountStart}
+            amountEnd={prjVal.amountEnd}
+            status={prjVal.status}
+            createdDate={prjVal.createdDate}
+            endDate={prjVal.endDate}
+            date={getFormattedDate(prjVal.endDate)}
+          />
         </div>
       );
     });
   }
   return (
     <>
-      <h1 className={classes.h1}>In-progress projects</h1>
+      {/* <h1 className={classes.h1}>In-progress projects</h1> */}
       <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
         {inProgressProjects}
       </div>
-      <h1 className={classes.h1}>Incomplete projects</h1>
+      {/* <h1 className={classes.h1}>Incomplete projects</h1> */}
+      {/* {incompleteProjects ? ( */}
       <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
         {incompleteProjects}
       </div>
-      <h1 className={classes.h1}>Completed projects</h1>
+      {/* ) : null} */}
+
+      {/* <h1 className={classes.h1}>Completed projects</h1> */}
       <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
         {completeProjects}
       </div>
