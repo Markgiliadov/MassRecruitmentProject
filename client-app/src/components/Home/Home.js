@@ -134,28 +134,28 @@ const Home = () => {
       );
     });
   }
-  if (projectsIncomplete) {
-    console.log(typeof projectsIncomplete);
-    incompleteProjects = projectsIncomplete.map((prjVal, index) => {
-      console.log(prjVal.pictures[0]);
-      return (
-        <div key={prjVal._id}>
-          <ProjectCard
-            titleProject={prjVal.titleProject}
-            idea={prjVal.idea}
-            video={prjVal.video}
-            pictures={prjVal.pictures}
-            amountStart={prjVal.amountStart}
-            amountEnd={prjVal.amountEnd}
-            status={prjVal.status}
-            createdDate={getFormattedDate(prjVal.createdDate)}
-            endDate={prjVal.endDate}
-            date={getFormattedDate(prjVal.endDate)}
-          />
-        </div>
-      );
-    });
-  }
+  // if (projectsIncomplete) {
+  //   console.log(typeof projectsIncomplete);
+  //   incompleteProjects = projectsIncomplete.map((prjVal, index) => {
+  //     console.log(prjVal.pictures[0]);
+  //     return (
+  //       <div key={prjVal._id}>
+  //         <ProjectCard
+  //           titleProject={prjVal.titleProject}
+  //           idea={prjVal.idea}
+  //           video={prjVal.video}
+  //           pictures={prjVal.pictures}
+  //           amountStart={prjVal.amountStart}
+  //           amountEnd={prjVal.amountEnd}
+  //           status={prjVal.status}
+  //           createdDate={getFormattedDate(prjVal.createdDate)}
+  //           endDate={prjVal.endDate}
+  //           date={getFormattedDate(prjVal.endDate)}
+  //         />
+  //       </div>
+  //     );
+  //   });
+  // }
   if (projectsComplete) {
     console.log(typeof projectsComplete);
     completeProjects = projectsComplete.map((prjVal, index) => {
@@ -180,18 +180,18 @@ const Home = () => {
   }
   return (
     <>
-      <h1 className={classes.h1}>In-progress projects</h1>
+      <h1 className={classes.h1}>In-progress</h1>
       <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
         {inProgressProjects}
       </div>
-      <h1 className={classes.h1}>Incomplete projects</h1>
+      {/* <h1 className={classes.h1}>Incomplete projects</h1> */}
       {/* {incompleteProjects ? ( */}
-      <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
+      {/* <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
         {incompleteProjects}
-      </div>
+      </div> */}
       {/* ) : null} */}
 
-      <h1 className={classes.h1}>Completed projects</h1>
+      <h1 className={classes.h1}>Completed</h1>
       <div style={{ overflowX: "scroll" }} className={classes.projectList_wrap}>
         {completeProjects}
       </div>
