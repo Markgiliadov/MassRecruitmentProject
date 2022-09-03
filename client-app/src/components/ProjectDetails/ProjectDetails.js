@@ -71,18 +71,20 @@ const ProjectDetails = () => {
     }
   };
   return (
-    <div>
+    <div className={classes.wrap}>
       <form className={classes.form} noValidate>
         <label className={classes.title}>
-          <span className={classes.text}>
-            {state.projectDetails.titleProject}
-          </span>
+          {state.projectDetails.titleProject}
         </label>
-        <img
-          className={classes.imagesProject}
-          src={state.projectDetails.pictures[0].img_url}
-          alt=""
-        />
+        {state.projectDetails.pictures.map((pic, index) => (
+          <img
+            key={index}
+            className={classes.imagesProject}
+            src={pic.img_url}
+            alt=""
+          />
+        ))}
+
         <label className={classes.info}>
           {state.projectDetails.idea}
           <div

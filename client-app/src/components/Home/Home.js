@@ -115,7 +115,7 @@ const Home = () => {
     inProgressProjects = projectsInProgress.map((prjVal, index) => {
       console.log(prjVal.pictures[0]);
 
-      console.log(getFormattedDate(prjVal.endDate));
+      // console.log(getFormattedDate(prjVal.endDate));
       return (
         <div key={prjVal._id}>
           <ProjectCard
@@ -126,7 +126,7 @@ const Home = () => {
             amountStart={prjVal.amountStart}
             amountEnd={prjVal.amountEnd}
             status={prjVal.status}
-            createdDate={prjVal.createdDate}
+            createdDate={getFormattedDate(prjVal.createdDate)}
             endDate={prjVal.endDate}
             date={getFormattedDate(prjVal.endDate)}
           />

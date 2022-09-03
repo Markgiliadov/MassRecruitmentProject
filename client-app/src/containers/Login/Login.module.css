@@ -43,7 +43,7 @@ input:focus {
   font-weight: 300;
   color: #ffffff;
   transition: all 0.4s;
-  background-color: gray;
+  background-color: #DDAF94;
 }
 .submit:hover {
   border: 0.4em solid #706464;

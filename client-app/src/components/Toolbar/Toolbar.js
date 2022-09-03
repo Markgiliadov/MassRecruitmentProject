@@ -46,7 +46,7 @@ const Toolbar = (props) => {
           // activeStyle={{ backgroundColor: "red" }}
           to={{ pathname: "/AddNewProject" }}
         >
-          Add new project
+          Add new product
         </NavLink>
         {!props.loginStatus ? (
           <>

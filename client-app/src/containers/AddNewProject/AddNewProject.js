@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import classes from "./AddNewProject.module.css";
 import { useNavigate } from "react-router-dom";
-import Moment from "moment";
 // import DatePicker from "../../components/DatePicker/DatePiker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useLocation } from "react-router-dom";
-import ProjectDetails from "../../components/ProjectDetails/ProjectDetails";
 const initialInputState = {
   titleProject: "",
   idea: "",
@@ -106,9 +104,10 @@ const Projects = () => {
         endDate: project.endDate,
       }),
     });
-    console.log(req);
+    // console.log(getCurrDate());
+    // console.log(req);
     const data = await req.json();
-    console.log(data, data.projects);
+    // console.log(data, data.projects);
     if (data.status === "ok") {
       navigate("/");
       setProjects(tempProjects);
@@ -122,7 +121,7 @@ const Projects = () => {
     const offsetDate = new Date(
       date.getTime() - date.getTimezoneOffset() * 60000
     );
-    console.log(offsetDate);
+    // console.log(offsetDate);
     setProject({ ...project, endDate: offsetDate });
   };
   const handleInputChange = (e) => {
@@ -149,21 +148,21 @@ const Projects = () => {
     setPicArr(values);
   };
   return (
-    <div>
+    <div className={classes.wrap}>
       <form className={classes.form} onSubmit={handleSubmit} noValidate>
         <label className={classes.label}>
-          Project name
+          Crop
           <input
             className={initialInputStyle}
             name="titleProject"
             type="text"
-            placeholder="Enter the name project"
+            placeholder="Enter the crop"
             value={project.titleProject}
             onChange={(e) => handleInputChange(e)}
           />
         </label>
         <label className={classes.label}>
-          Project idea
+          Crop information
           <div
             // className={inputsStyles..join(" ")}
             style={{ display: "flex" }}
@@ -173,7 +172,8 @@ const Projects = () => {
               style={{ border: "outset", padding: "0" }}
               name="idea"
               type="text"
-              placeholder="Type your idea here"
+              placeholder="tell us more about 
+              the crop"
               value={project.idea}
               onChange={(e) => {
                 // setEmailAvailabilityLogo(null);
@@ -228,7 +228,7 @@ const Projects = () => {
         </label>
 
         <label className={classes.label}>
-          Amount to reach
+          Amount
           <input
             className={initialInputStyle}
             name="amountEnd"
@@ -239,7 +239,7 @@ const Projects = () => {
           />
           {/* {inputError.phonenumber} */}
         </label>
-        <label className={classes.label}>
+        {/* <label className={classes.label}>
           Would you like to invest? (Optional) Please enter amount:
           <input
             className={initialInputStyle}
@@ -248,9 +248,9 @@ const Projects = () => {
             placeholder="Amount to reach"
             value={project.amountStart}
             onChange={(e) => handleInputChange(e)}
-          />
-          {/* {inputError.phonenumber} */}
-        </label>
+          /> */}
+        {/* {inputError.phonenumber} */}
+        {/* </label> */}
 
         <label className={classes.label}>
           Set end date :
@@ -266,7 +266,7 @@ const Projects = () => {
         </label>
         <input
           type="submit"
-          value="Add new project"
+          value="Add new product"
           className={classes.submit}
           style={{ cursor: "pointer", height: "45px", marginTop: "5px" }}
         />

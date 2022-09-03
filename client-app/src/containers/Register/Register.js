@@ -464,7 +464,7 @@ const Register = (props) => {
               value="investor"
               onChange={(e) => handleInputChange(e)}
             />
-            Investor
+            Supplier
             <input
               // className={inputsStyles.phonenumber.join(" ")}
               style={{ margin: "5%" }}
@@ -474,7 +474,7 @@ const Register = (props) => {
               value="Project Manager"
               onChange={(e) => handleInputChange(e)}
             />
-            Project Manager
+            Farmer owner
           </div>
         </label>
         <input

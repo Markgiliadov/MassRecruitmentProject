@@ -3,6 +3,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 0.5em;
   padding: 2px;
+  background-color: #fff5d7;
 }
 
 @media (max-width: 400px) {
@@ -18,7 +19,7 @@
 }
 .h1 {
   color: #111;
-  background-color: #aca99e;
+  background-color: #f9d36b;
   font-family: "Helvetica Neue", sans-serif;
   font-size: 26px;
   font-weight: bold;

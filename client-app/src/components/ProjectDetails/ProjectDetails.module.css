@@ -1,3 +1,6 @@
+.wrap{
+  background-color: #fff5d7;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -212,7 +215,7 @@ input:focus {
   }
 }
 .text {
-  background-color: rgb(97, 79, 79);
+  background-color: rgb(231, 18, 18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,7 +243,7 @@ input:focus {
   width: 0;
 }
 
-.text:hover::after {
+/* .text:hover::after {
   width: 100%;
   left: 0;
-}
+} */

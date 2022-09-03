@@ -5,6 +5,7 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import { NavLink } from "react-router-dom";
 
 const Project = (props) => {
+  console.log(props.createdDate);
   let prjPics = null;
 
   if (props.pictures[0]) {
@@ -55,7 +56,7 @@ const Project = (props) => {
             pathname: `/ProjectDetails/${props.titleProject}`,
           }}
         >
-          Visit Project Page
+          Visit Product Page
         </NavLink>
         <NavLink
           className={classes.button1}
@@ -64,7 +65,7 @@ const Project = (props) => {
             pathname: `/AddNewProject/${props.titleProject}`,
           }}
         >
-          Edit project
+          Edit
         </NavLink>
       </footer>
     </div>
